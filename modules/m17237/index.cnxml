@@ -1,0 +1,189 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>"Notes on the Design of Optimal FIR Filters" Appendix A</title>
+  <metadata>
+  <md:content-id>m17237</md:content-id><md:title>"Notes on the Design of Optimal FIR Filters" Appendix A</md:title>
+  <md:abstract/>
+  <md:uuid>500e8f54-eea2-4241-b182-eaeda8c9b44f</md:uuid>
+</metadata>
+
+<content>
+    <section id="uid1">
+      <title>The Formula for Converting between <!--Math is not currently allowed in CNXML section title.--> and Passband Ripple</title>
+      <para id="id2255572">From
+
+ <link document="m17232" target-id="uid5"> equation 2 in the module titled Statement of Optimal Linear Phase FIR Filter Design Problem</link>,
+
+the peak-to-peak passband ripple, measured in
+decibels, is given by</para>
+      <equation id="id2255580"><m:math mode="display">
+		<m:mrow>
+			<m:mi>P</m:mi>
+			<m:mi>B</m:mi>
+			<m:mi>R</m:mi>
+			<m:mo>=</m:mo>
+			<m:mn>10</m:mn>
+			<m:mspace width="3.33333pt"/>
+			<m:mi>l</m:mi>
+			<m:mi>o</m:mi>
+			<m:msub>
+				<m:mi>g</m:mi>
+				<m:mn>10</m:mn>
+			</m:msub>
+			<m:mfrac>
+				<m:msup>
+					<m:mrow>
+						<m:mo>(</m:mo>
+						<m:mn>1</m:mn>
+						<m:mo>+</m:mo>
+						<m:msub>
+							<m:mi>δ</m:mi>
+							<m:mn>1</m:mn>
+						</m:msub>
+						<m:mo>)</m:mo>
+					</m:mrow>
+					<m:mn>2</m:mn>
+				</m:msup>
+				<m:msup>
+					<m:mrow>
+						<m:mo>(</m:mo>
+						<m:mn>1</m:mn>
+						<m:mo>-</m:mo>
+						<m:msub>
+							<m:mi>δ</m:mi>
+							<m:mn>1</m:mn>
+						</m:msub>
+						<m:mo>)</m:mo>
+					</m:mrow>
+					<m:mn>2</m:mn>
+				</m:msup>
+			</m:mfrac>
+			<m:mo>,</m:mo>
+		</m:mrow>
+	</m:math>
+</equation>
+      <para id="id2255672">where <m:math><m:msub><m:mi>δ</m:mi><m:mn>1</m:mn></m:msub></m:math> is the peak amplitude deviation in the
+passband. Suppose now that</para>
+      <equation id="id2255693">
+        <m:math mode="display">
+          <m:mrow>
+            <m:mn>0</m:mn>
+            <m:mspace width="3.33333pt"/>
+            <m:mo>&lt;</m:mo>
+            <m:mspace width="3.33333pt"/>
+            <m:msub>
+              <m:mi>δ</m:mi>
+              <m:mn>1</m:mn>
+            </m:msub>
+            <m:mspace width="3.33333pt"/>
+            <m:mo>≪</m:mo>
+            <m:mspace width="3.33333pt"/>
+            <m:mn>1</m:mn>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2254919">If so, then the passband ripple PBR is closely approximated by</para>
+      <equation id="id2255979">
+        <m:math mode="display">
+          <m:mrow>
+            <m:mi>P</m:mi>
+            <m:mi>B</m:mi>
+            <m:mi>R</m:mi>
+            <m:mo>≈</m:mo>
+            <m:mn>10</m:mn>
+            <m:mspace width="3.33333pt"/>
+            <m:mi>l</m:mi>
+            <m:mi>o</m:mi>
+            <m:msub>
+              <m:mi>g</m:mi>
+              <m:mn>10</m:mn>
+            </m:msub>
+            <m:mrow>
+              <m:mo>(</m:mo>
+              <m:mn>1</m:mn>
+              <m:mo>+</m:mo>
+              <m:mn>4</m:mn>
+              <m:msub>
+                <m:mi>δ</m:mi>
+                <m:mn>1</m:mn>
+              </m:msub>
+              <m:mo>)</m:mo>
+            </m:mrow>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2256034">Now recall that <m:math><m:mrow><m:mi>l</m:mi><m:mi>o</m:mi><m:msub><m:mi>g</m:mi><m:mi>e</m:mi></m:msub><m:mspace width="3.33333pt"/><m:mrow><m:mo>(</m:mo><m:mn>1</m:mn><m:mo>+</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mspace width="3.33333pt"/><m:mo>≈</m:mo><m:mspace width="3.33333pt"/><m:mi>x</m:mi></m:mrow></m:math>, when <m:math><m:mi>x</m:mi></m:math> is
+small compared to unity, and that <m:math><m:mrow><m:mi>l</m:mi><m:mi>o</m:mi><m:msub><m:mi>g</m:mi><m:mn>10</m:mn></m:msub><m:mi>x</m:mi><m:mspace width="3.33333pt"/><m:mo>≈</m:mo><m:mspace width="3.33333pt"/><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>434</m:mn><m:mo>·</m:mo><m:mi>l</m:mi><m:mi>o</m:mi><m:msub><m:mi>g</m:mi><m:mi>e</m:mi></m:msub><m:mi>x</m:mi></m:mrow></m:math>.
+Combining these facts, leads to the equation</para>
+      <equation id="id2256146">
+        <m:math mode="display">
+          <m:mrow>
+            <m:mi>P</m:mi>
+            <m:mi>B</m:mi>
+            <m:mi>R</m:mi>
+            <m:mo>≈</m:mo>
+            <m:mn>10</m:mn>
+            <m:mspace width="3.33333pt"/>
+            <m:mi>l</m:mi>
+            <m:mi>o</m:mi>
+            <m:msub>
+              <m:mi>g</m:mi>
+              <m:mn>10</m:mn>
+            </m:msub>
+            <m:mrow>
+              <m:mo>(</m:mo>
+              <m:mn>1</m:mn>
+              <m:mo>+</m:mo>
+              <m:mn>4</m:mn>
+              <m:msub>
+                <m:mi>δ</m:mi>
+                <m:mn>1</m:mn>
+              </m:msub>
+              <m:mo>)</m:mo>
+            </m:mrow>
+            <m:mspace width="3.33333pt"/>
+            <m:mo>≈</m:mo>
+            <m:mspace width="3.33333pt"/>
+            <m:mn>4</m:mn>
+            <m:mo>.</m:mo>
+            <m:mn>34</m:mn>
+            <m:mo>·</m:mo>
+            <m:mi>l</m:mi>
+            <m:mi>o</m:mi>
+            <m:msub>
+              <m:mi>g</m:mi>
+              <m:mi>e</m:mi>
+            </m:msub>
+            <m:mrow>
+              <m:mo>(</m:mo>
+              <m:mn>1</m:mn>
+              <m:mo>+</m:mo>
+              <m:mn>4</m:mn>
+              <m:msub>
+                <m:mi>δ</m:mi>
+                <m:mn>1</m:mn>
+              </m:msub>
+              <m:mo>)</m:mo>
+            </m:mrow>
+            <m:mspace width="3.33333pt"/>
+            <m:mo>≈</m:mo>
+            <m:mspace width="3.33333pt"/>
+            <m:mn>17</m:mn>
+            <m:mo>.</m:mo>
+            <m:mn>36</m:mn>
+            <m:mo>·</m:mo>
+            <m:msub>
+              <m:mi>δ</m:mi>
+              <m:mn>1</m:mn>
+            </m:msub>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2256274">This formula holds as long as <m:math><m:msub><m:mi>δ</m:mi><m:mn>1</m:mn></m:msub></m:math> is small compared to unity.
+Using <m:math><m:mrow><m:msub><m:mi>δ</m:mi><m:mn>1</m:mn></m:msub><m:mo>=</m:mo><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>1</m:mn></m:mrow></m:math> as a benchmark, the formula holds for values of passband
+ripple less than 1.5 to 2 dB, the range in which most filter design falls.</para>
+    </section>
+  </content>
+</document>

@@ -1,0 +1,78 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Why Does α Depend on the Cutoff Frequency?</title>
+  <metadata>
+  <md:content-id>m17230</md:content-id><md:title>Why Does α Depend on the Cutoff Frequency?</md:title>
+  <md:abstract/>
+  <md:uuid>c71af9ea-e7b4-4726-8557-4b6c2e4e25ab</md:uuid>
+</metadata>
+
+<content>
+    
+      <para id="id2255573">The formulas presented in <link document="m17234" target-id="uid2">Equation 1</link>
+
+and <link document="m17234" target-id="uid3">Equation 2 from the module titled 
+"Filter Sizing"</link>
+
+imply that <m:math><m:mi>α</m:mi></m:math> and hence the required filter
+order <m:math><m:mi>N</m:mi></m:math> are independent of the cutoff frequency <m:math><m:msub><m:mi>f</m:mi><m:mi>c</m:mi></m:msub></m:math>. The supporting
+analysis showed that this is only true in the limit of high order filters,
+i.e. when <m:math><m:mi>N</m:mi></m:math> is large. The dependence for shorter filters is shown in
+<link document="m17234" target-id="uid11"> Figure 2 from the module titled "Filter Sizing"</link>.
+
+Why should this occur? Consider the filter
+design problem shown in <link target-id="uid6"/>. Again the goal is a simple
+lowpass filter with cutoff frequency <m:math><m:msub><m:mi>f</m:mi><m:mi>c</m:mi></m:msub></m:math>. The frequency sampling points
+at frequency multiples of <m:math><m:mfrac><m:msub><m:mi>f</m:mi><m:mi>s</m:mi></m:msub><m:mi>N</m:mi></m:mfrac></m:math> are also shown as solid dots.
+Instead of fixing the gains we presume that the filter gains <m:math><m:msub><m:mover accent="true"><m:mi>h</m:mi><m:mo>^</m:mo></m:mover><m:mi>n</m:mi></m:msub></m:math>,
+or, equivalently, the graphic equalizer levers, are optimized, by whatever
+means, to yield the best stopband ripple performance.</para>
+      <para id="id2255697"><link target-id="uid6"/>(a) shows the combination of gains <m:math><m:msub><m:mover accent="true"><m:mi>h</m:mi><m:mo>^</m:mo></m:mover><m:mi>n</m:mi></m:msub></m:math> needed
+to constrain the peak stopband ripple to a given level, say <m:math><m:mover accent="true"><m:msub><m:mi>δ</m:mi><m:mn>2</m:mn></m:msub><m:mo>¯</m:mo></m:mover></m:math>.
+The frequency at which this equal ripple band starts is of course
+<m:math><m:msub><m:mi>f</m:mi><m:mrow><m:mi>s</m:mi><m:mi>t</m:mi></m:mrow></m:msub></m:math> and the difference between <m:math><m:msub><m:mi>f</m:mi><m:mrow><m:mi>s</m:mi><m:mi>t</m:mi></m:mrow></m:msub></m:math> and <m:math><m:msub><m:mi>f</m:mi><m:mi>c</m:mi></m:msub></m:math> is <m:math><m:mrow><m:mi>Δ</m:mi><m:mi>f</m:mi></m:mrow></m:math>.
+Now suppose that <m:math><m:msub><m:mi>f</m:mi><m:mi>c</m:mi></m:msub></m:math> is increased slightly, as shown in
+<link target-id="uid6"/>(b). Now a different set of the <m:math><m:msub><m:mover accent="true"><m:mi>h</m:mi><m:mo>^</m:mo></m:mover><m:mi>n</m:mi></m:msub></m:math> are
+needed to make the peak ripple equal <m:math><m:mover accent="true"><m:msub><m:mi>δ</m:mi><m:mn>2</m:mn></m:msub><m:mo>¯</m:mo></m:mover></m:math> and these result
+in different values of <m:math><m:msub><m:mi>f</m:mi><m:mrow><m:mi>s</m:mi><m:mi>t</m:mi></m:mrow></m:msub></m:math> and <m:math><m:mrow><m:mi>Δ</m:mi><m:mi>f</m:mi></m:mrow></m:math>. Pursuing this graphical
+analysis we find that:</para>
+      <list id="id2255902" list-type="bulleted"><item id="uid2">Cutoff frequencies near multiples of <m:math><m:mfrac><m:msub><m:mi>f</m:mi><m:mi>s</m:mi></m:msub><m:mi>N</m:mi></m:mfrac></m:math> result in
+smaller transition bands, and hence smaller values of <m:math><m:mi>α</m:mi></m:math>, than
+those near the center of two bins. This occurs, to first order, since
+two or more stopband basis filters are needed to
+cancel the first sidelobe of the last basis passband filter when the passband
+stops between two bins, while one is needed if the passband stops
+near a bin.
+</item>
+	<item id="uid3">Because these “hard" and “easy" frequency ranges occur
+for every bin, the number of the ranges, counting both positive and
+negative frequencies, is about the same as the filter
+order<footnote id="id14462472">Various boundary conditions can make the actual number one less
+or one more than the filter order.</footnote><m:math><m:mi>N</m:mi></m:math>.
+</item>
+	<item id="uid5">The variation in the transition band <m:math><m:mrow><m:mi>Δ</m:mi><m:mi>f</m:mi></m:mrow></m:math> is more pronounced
+as <m:math><m:mi>N</m:mi></m:math> decreases since there are fewer basis filters to use in
+optimizing the response.
+</item>
+</list>
+      <figure id="uid6" orient="horizontal">
+        <media id="id14462525" alt=""><image src="../../media/fig11.png" mime-type="image/png" width="444"/><image for="pdf" src="../../media/fig11.eps" mime-type="application/postscript"/></media>
+        <caption>Visualizing the Effects of Cutoff Frequency on Design Difficulty</caption>
+      </figure>
+      <para id="id2256026">As an aside one might observe from <link document="m17240" target-id="uid3">Figure 1 from the module titled Performance Comparison with other FIR Design Methods</link> that all
+three methods perform about equally for high levels of stopband ripple.
+Intuitively the reason for this should now be clear. Window-based methods
+need not use much shaping if high levels of ripple are tolerable.
+Similarly, frequency sampling need not use many adjustable coefficients.
+Since this is true the equal-ripple techniques will not perform much better
+since their only advantage is that of adjusting all of the filter gains.
+The underlying point is that, for high-ripple designs, all of the methods
+produce designs closely resembling the sum of simple, shifted
+<m:math><m:mfrac><m:mrow><m:mi>s</m:mi><m:mi>i</m:mi><m:mi>n</m:mi><m:mspace width="3.33333pt"/><m:mi>N</m:mi><m:mi>q</m:mi></m:mrow><m:mrow><m:mi>s</m:mi><m:mi>i</m:mi><m:mi>n</m:mi><m:mspace width="3.33333pt"/><m:mi>q</m:mi></m:mrow></m:mfrac></m:math> functions and produce a transition band
+<m:math><m:mrow><m:mi>Δ</m:mi><m:mi>f</m:mi></m:mrow></m:math> of about the order of <m:math><m:mfrac><m:msub><m:mi>f</m:mi><m:mi>s</m:mi></m:msub><m:mi>N</m:mi></m:mfrac></m:math>, hence an <m:math><m:mi>α</m:mi></m:math>
+of about unity. Only as the stopband ripple specification grows tighter
+does the method and accuracy of adjusting the coefficients and the number
+of them available for adjustment begin to affect the transition band
+performance.</para>
+    
+  </content>
+</document>

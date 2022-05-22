@@ -1,0 +1,447 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>"Notes on the Design of Optimal FIR Filters" Appendix B</title>
+  <metadata>
+  <md:content-id>m17238</md:content-id><md:title>"Notes on the Design of Optimal FIR Filters" Appendix B</md:title>
+  <md:abstract/>
+  <md:uuid>aa9091df-11d6-49ea-a11e-40cc1e54abea</md:uuid>
+</metadata>
+
+<content>
+    <section id="uid1">
+      <title>Some Notes on Chebyshev Polynomials</title>
+      <para id="id2255548"><link document="m17234" target-id="uid6">The section "The Derivation of the Formula" from the module titled "Filter Sizing"</link> 
+
+used some of the properties of the Chebyshev
+polynomials to develop the key formulas used for FIR filter sizing.
+This appendix provides a very brief review of these polynomials and the
+equations used to generate them.</para>
+      <para id="id2255557"><link target-id="uid2"/> shows a set of polynomials which have the
+property that, for values of <m:math><m:mi>x</m:mi></m:math> between -1 and 1, the polynomial has
+peak magnitude of unity. A footnote in <link document="m17234" target-id="uid6">The section "The Derivation of the Formula" from the module titled "Filter Sizing"</link> 
+
+pointed out
+that the Russian engineer Chebyshev developed these polynomials as part
+of design effort which required minimizing the maximum lateral excursion of
+a locomotive drive rod. For each polynomial order, say <m:math><m:mi>M</m:mi></m:math>, the objective is
+to choose the polynomial's coefficients so that that it “ripples" between
+<m:math><m:mrow><m:mi>x</m:mi><m:mo>=</m:mo><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:math> and <m:math><m:mrow><m:mi>x</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow></m:math> and then proceeds off proportional to <m:math><m:msup><m:mrow><m:mo>|</m:mo><m:mi>x</m:mi><m:mo>|</m:mo></m:mrow><m:mi>M</m:mi></m:msup></m:math> for values
+of <m:math><m:mrow><m:mo>|</m:mo><m:mi>x</m:mi><m:mo>|</m:mo><m:mo>&gt;</m:mo><m:mn>1</m:mn><m:mo>.</m:mo></m:mrow></m:math> Not only did Chebyshev find such polynomials, he found that
+one exists for each positive value of <m:math><m:mi>M</m:mi></m:math>, and that they are related thorugh
+a recursion equation, that is, the polynomial for <m:math><m:mi>M</m:mi></m:math> can directly obtained
+for the polynomial for <m:math><m:mi>M</m:mi></m:math>-1.</para>
+      <figure id="uid2" orient="horizontal">
+        <media id="id1172394619941" alt=""><image src="../../media/fig12.png" mime-type="image/png" width="366"/><image for="pdf" src="../../media/fig12.eps" mime-type="application/postscript"/></media>
+        <caption>Graphs of Chebyshev Polynomials of Orders 0 through 4</caption>
+      </figure>
+      <para id="id2255712">Consider the following recursion expression:</para>
+      <equation id="uid3">
+        <m:math mode="display">
+          <m:mrow>
+            <m:msub>
+              <m:mi>P</m:mi>
+              <m:mi>M</m:mi>
+            </m:msub>
+            <m:mrow>
+              <m:mo>(</m:mo>
+              <m:mi>x</m:mi>
+              <m:mo>)</m:mo>
+            </m:mrow>
+            <m:mo>=</m:mo>
+            <m:mn>2</m:mn>
+            <m:mi>x</m:mi>
+            <m:mo>·</m:mo>
+            <m:msub>
+              <m:mi>P</m:mi>
+              <m:mrow>
+                <m:mi>M</m:mi>
+                <m:mo>-</m:mo>
+                <m:mn>1</m:mn>
+              </m:mrow>
+            </m:msub>
+            <m:mrow>
+              <m:mo>(</m:mo>
+              <m:mi>x</m:mi>
+              <m:mo>)</m:mo>
+            </m:mrow>
+            <m:mo>-</m:mo>
+            <m:msub>
+              <m:mi>P</m:mi>
+              <m:mrow>
+                <m:mi>M</m:mi>
+                <m:mo>-</m:mo>
+                <m:mn>2</m:mn>
+              </m:mrow>
+            </m:msub>
+            <m:mrow>
+              <m:mo>(</m:mo>
+              <m:mi>x</m:mi>
+              <m:mo>)</m:mo>
+            </m:mrow>
+            <m:mo>,</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2254891">with initial conditions of</para>
+      <equation id="id2254897">
+        <m:math mode="display">
+          <m:mrow>
+            <m:msub>
+              <m:mi>P</m:mi>
+              <m:mn>0</m:mn>
+            </m:msub>
+            <m:mo>=</m:mo>
+            <m:mn>1</m:mn>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2254918">and</para>
+      <equation id="id2254923">
+        <m:math mode="display">
+          <m:mrow>
+            <m:msub>
+              <m:mi>P</m:mi>
+              <m:mn>1</m:mn>
+            </m:msub>
+            <m:mo>=</m:mo>
+            <m:mi>x</m:mi>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2256090">Note that both of these initial conditions meet (if
+trivially) the stated
+criteria for being Chebyshev polynomials.</para>
+      <para id="id2256097">Using this recursion expression we find, for <m:math><m:mi>M</m:mi></m:math> from 0 to 5, that:</para>
+      <equation id="id2256111"><m:math mode="display">
+		<m:mtable displaystyle="true">
+			<m:mtr>
+				<m:mtd columnalign="right">
+					<m:mrow>
+						<m:msub>
+							<m:mi>P</m:mi>
+							<m:mn>0</m:mn>
+						</m:msub>
+						<m:mrow>
+							<m:mo>(</m:mo>
+							<m:mi>x</m:mi>
+							<m:mo>)</m:mo>
+						</m:mrow>
+					</m:mrow>
+				</m:mtd>
+				<m:mtd>
+					<m:mo>=</m:mo>
+				</m:mtd>
+				<m:mtd columnalign="left">
+					<m:mn>1</m:mn>
+				</m:mtd>
+			</m:mtr>
+			<m:mtr>
+				<m:mtd columnalign="right">
+					<m:mrow>
+						<m:msub>
+							<m:mi>P</m:mi>
+							<m:mn>1</m:mn>
+						</m:msub>
+						<m:mrow>
+							<m:mo>(</m:mo>
+							<m:mi>x</m:mi>
+							<m:mo>)</m:mo>
+						</m:mrow>
+					</m:mrow>
+				</m:mtd>
+				<m:mtd>
+					<m:mo>=</m:mo>
+				</m:mtd>
+				<m:mtd columnalign="left">
+					<m:mi>x</m:mi>
+				</m:mtd>
+			</m:mtr>
+			<m:mtr>
+				<m:mtd columnalign="right">
+					<m:mrow>
+						<m:msub>
+							<m:mi>P</m:mi>
+							<m:mn>2</m:mn>
+						</m:msub>
+						<m:mrow>
+							<m:mo>(</m:mo>
+							<m:mi>x</m:mi>
+							<m:mo>)</m:mo>
+						</m:mrow>
+					</m:mrow>
+				</m:mtd>
+				<m:mtd>
+					<m:mo>=</m:mo>
+				</m:mtd>
+				<m:mtd columnalign="left">
+					<m:mrow>
+						<m:mn>2</m:mn>
+						<m:msup>
+							<m:mi>x</m:mi>
+							<m:mn>2</m:mn>
+						</m:msup>
+						<m:mo>-</m:mo>
+						<m:mn>1</m:mn>
+					</m:mrow>
+				</m:mtd>
+			</m:mtr>
+			<m:mtr>
+				<m:mtd columnalign="right">
+					<m:mrow>
+						<m:msub>
+							<m:mi>P</m:mi>
+							<m:mn>3</m:mn>
+						</m:msub>
+						<m:mrow>
+							<m:mo>(</m:mo>
+							<m:mi>x</m:mi>
+							<m:mo>)</m:mo>
+						</m:mrow>
+					</m:mrow>
+				</m:mtd>
+				<m:mtd>
+					<m:mo>=</m:mo>
+				</m:mtd>
+				<m:mtd columnalign="left">
+					<m:mrow>
+						<m:mn>4</m:mn>
+						<m:msup>
+							<m:mi>x</m:mi>
+							<m:mn>3</m:mn>
+						</m:msup>
+						<m:mo>-</m:mo>
+						<m:mn>3</m:mn>
+						<m:mi>x</m:mi>
+					</m:mrow>
+				</m:mtd>
+			</m:mtr>
+			<m:mtr>
+				<m:mtd columnalign="right">
+					<m:mrow>
+						<m:msub>
+							<m:mi>P</m:mi>
+							<m:mn>4</m:mn>
+						</m:msub>
+						<m:mrow>
+							<m:mo>(</m:mo>
+							<m:mi>x</m:mi>
+							<m:mo>)</m:mo>
+						</m:mrow>
+					</m:mrow>
+				</m:mtd>
+				<m:mtd>
+					<m:mo>=</m:mo>
+				</m:mtd>
+				<m:mtd columnalign="left">
+					<m:mrow>
+						<m:mn>8</m:mn>
+						<m:msup>
+							<m:mi>x</m:mi>
+							<m:mn>4</m:mn>
+						</m:msup>
+						<m:mo>-</m:mo>
+						<m:mn>8</m:mn>
+						<m:msup>
+							<m:mi>x</m:mi>
+							<m:mn>2</m:mn>
+						</m:msup>
+						<m:mo>+</m:mo>
+						<m:mn>1</m:mn>
+					</m:mrow>
+				</m:mtd>
+			</m:mtr>
+			<m:mtr>
+				<m:mtd columnalign="right">
+					<m:mrow>
+						<m:msub>
+							<m:mi>P</m:mi>
+							<m:mn>5</m:mn>
+						</m:msub>
+						<m:mrow>
+							<m:mo>(</m:mo>
+							<m:mi>x</m:mi>
+							<m:mo>)</m:mo>
+						</m:mrow>
+					</m:mrow>
+				</m:mtd>
+				<m:mtd>
+					<m:mo>=</m:mo>
+				</m:mtd>
+				<m:mtd columnalign="left">
+					<m:mrow>
+						<m:mn>16</m:mn>
+						<m:msup>
+							<m:mi>x</m:mi>
+							<m:mn>5</m:mn>
+						</m:msup>
+						<m:mo>-</m:mo>
+						<m:mn>20</m:mn>
+						<m:msup>
+							<m:mi>x</m:mi>
+							<m:mn>3</m:mn>
+						</m:msup>
+						<m:mo>+</m:mo>
+						<m:mn>5</m:mn>
+						<m:mi>x</m:mi>
+					</m:mrow>
+				</m:mtd>
+			</m:mtr>
+		</m:mtable>
+	</m:math>
+</equation>
+      <para id="id2256374">These polynomials are plotted in <link target-id="uid2"/>
+and it may be confirmed by inspection that they meet the stated criteria.</para>
+      <para id="id2256387">A surprising result is that there is yet another way to present these
+polynomials. This method is given by the following equations:</para>
+      <equation id="uid4"><m:math mode="display">
+          <m:mtable displaystyle="true">
+            <m:mtr>
+              <m:mtd columnalign="right">
+                <m:mrow>
+                  <m:msub>
+                    <m:mi>P</m:mi>
+                    <m:mi>M</m:mi>
+                  </m:msub>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mi>x</m:mi>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                </m:mrow>
+              </m:mtd>
+              <m:mtd>
+                <m:mo>=</m:mo>
+              </m:mtd>
+              <m:mtd columnalign="left">
+                <m:mrow>
+                  <m:mi>c</m:mi>
+                  <m:mi>o</m:mi>
+                  <m:mi>s</m:mi>
+                  <m:mo>[</m:mo>
+                  <m:mi>M</m:mi>
+                  <m:mo>·</m:mo>
+                  <m:mi>c</m:mi>
+                  <m:mi>o</m:mi>
+                  <m:msup>
+                    <m:mi>s</m:mi>
+                    <m:mrow>
+                      <m:mo>-</m:mo>
+                      <m:mn>1</m:mn>
+                    </m:mrow>
+                  </m:msup>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mi>x</m:mi>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                  <m:mo>]</m:mo>
+                  <m:mo>,</m:mo>
+                  <m:mspace width="3.33333pt"/>
+                  <m:mi>f</m:mi>
+                  <m:mi>o</m:mi>
+                  <m:mi>r</m:mi>
+                  <m:mspace width="3.33333pt"/>
+                  <m:mo>|</m:mo>
+                  <m:mi>x</m:mi>
+                  <m:mo>|</m:mo>
+                  <m:mo>≤</m:mo>
+                  <m:mn>1</m:mn>
+                  <m:mo>,</m:mo>
+                  <m:mspace width="3.33333pt"/>
+                  <m:mi>a</m:mi>
+                  <m:mi>n</m:mi>
+                  <m:mi>d</m:mi>
+                </m:mrow>
+              </m:mtd>
+            </m:mtr>
+          </m:mtable>
+        </m:math>
+      </equation>
+      <equation id="element-53"><m:math mode="display">
+  <m:mtable displaystyle="true">
+<m:mtr>
+              <m:mtd columnalign="right">
+                <m:mrow>
+                  <m:msub>
+                    <m:mi>P</m:mi>
+                    <m:mi>M</m:mi>
+                  </m:msub>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mi>x</m:mi>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                </m:mrow>
+              </m:mtd>
+              <m:mtd>
+                <m:mo>=</m:mo>
+              </m:mtd>
+              <m:mtd columnalign="left">
+                <m:mrow>
+                  <m:mi>c</m:mi>
+                  <m:mi>o</m:mi>
+                  <m:mi>s</m:mi>
+                  <m:mi>h</m:mi>
+                  <m:mo>[</m:mo>
+                  <m:mi>M</m:mi>
+                  <m:mo>·</m:mo>
+                  <m:mi>c</m:mi>
+                  <m:mi>o</m:mi>
+                  <m:mi>s</m:mi>
+                  <m:msup>
+                    <m:mi>h</m:mi>
+                    <m:mrow>
+                      <m:mo>-</m:mo>
+                      <m:mn>1</m:mn>
+                    </m:mrow>
+                  </m:msup>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mi>x</m:mi>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                  <m:mo>]</m:mo>
+                  <m:mo>,</m:mo>
+                  <m:mspace width="3.33333pt"/>
+                  <m:mi>f</m:mi>
+                  <m:mi>o</m:mi>
+                  <m:mi>r</m:mi>
+                  <m:mspace width="3.33333pt"/>
+                  <m:mo>|</m:mo>
+                  <m:mi>x</m:mi>
+                  <m:mo>|</m:mo>
+                  <m:mo>&gt;</m:mo>
+                  <m:mn>1</m:mn>
+                  <m:mo>.</m:mo>
+                </m:mrow>
+              </m:mtd>
+            </m:mtr>
+          </m:mtable>
+        </m:math> </equation><para id="id2256607">Analytically it can be confirmed that these equations satisfy the recursion
+seen in equation <link target-id="uid3"/>. To see that they describe the same polynomials
+as seen in <link target-id="uid2"/>, consider <link target-id="uid4"/>
+for values of <m:math><m:mrow><m:mo>|</m:mo><m:mi>x</m:mi><m:mo>|</m:mo></m:mrow></m:math> between -1 and 1. For such values <m:math><m:mrow><m:mi>c</m:mi><m:mi>o</m:mi><m:msup><m:mi>s</m:mi><m:mrow><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msup><m:mi>x</m:mi></m:mrow></m:math> ranges
+between <m:math><m:mi>π</m:mi></m:math> and 0. Thus <m:math><m:mrow><m:mi>M</m:mi><m:mo>·</m:mo><m:mi>c</m:mi><m:mi>o</m:mi><m:msup><m:mi>s</m:mi><m:mrow><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msup><m:mi>x</m:mi></m:mrow></m:math> ranges between
+<m:math><m:mrow><m:mi>M</m:mi><m:mi>π</m:mi></m:mrow></m:math> and 0, and <m:math><m:mrow><m:mi>c</m:mi><m:mi>o</m:mi><m:mi>s</m:mi><m:mo>[</m:mo><m:mi>M</m:mi><m:mo>·</m:mo><m:mi>c</m:mi><m:mi>o</m:mi><m:msup><m:mi>s</m:mi><m:mrow><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msup><m:mi>x</m:mi><m:mo>]</m:mo></m:mrow></m:math> cycles between -1 or 1 and
+1, hiting <m:math><m:mrow><m:mi>M</m:mi><m:mo>+</m:mo><m:mn>1</m:mn></m:mrow></m:math> extrema on the way, counting the endpoints. Similar
+analysis shows that equation <link target-id="element-53"/> grows monotonically in
+magnitude as <m:math><m:mrow><m:mo>|</m:mo><m:mi>x</m:mi><m:mo>|</m:mo></m:mrow></m:math> does. In fact it is easy to show that
+<m:math><m:mrow><m:mo>|</m:mo><m:mi>c</m:mi><m:mi>o</m:mi><m:mi>s</m:mi><m:mi>h</m:mi><m:mo>[</m:mo><m:mi>M</m:mi><m:mo>·</m:mo><m:mi>c</m:mi><m:mi>o</m:mi><m:mi>s</m:mi><m:msup><m:mi>h</m:mi><m:mrow><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msup><m:mi>x</m:mi><m:mo>]</m:mo><m:mo>|</m:mo></m:mrow></m:math> assymptotically approaches <m:math><m:msup><m:mrow><m:mo>|</m:mo><m:mi>x</m:mi><m:mo>|</m:mo></m:mrow><m:mi>M</m:mi></m:msup></m:math> as
+<m:math><m:mrow><m:mo>|</m:mo><m:mi>x</m:mi><m:mo>|</m:mo></m:mrow></m:math> gets much greater than one.</para>
+      <para id="id2256875">This second form of the definition for Chebyshev polynomials is very useful
+since it is a closed form and because it involves cosines, a functional
+form appearing frequently in frequency-domain representations of filters.
+In light of this a final twist might be noted. <link target-id="element-53"/>
+is in fact superfluous given <link target-id="uid4"/>. To see this,
+consider evaluating <link target-id="uid4"/> for <m:math><m:mrow><m:mo>|</m:mo><m:mi>x</m:mi><m:mo>|</m:mo><m:mo>=</m:mo><m:mn>2</m:mn></m:mrow></m:math>. It initially
+appears that this won't work, since arccosine cannot be evaluated for
+arguments greater than unity. In fact it can, it's just that the result is
+purely imaginary. It is easy, using Euler's definition of the cosine, to see
+that the cosine of <m:math><m:mrow><m:mi>j</m:mi><m:mi>x</m:mi></m:mrow></m:math> is the same as the hyberbolic cosine of <m:math><m:mi>x</m:mi></m:math>. Thus
+the arccosine of 2 is <m:math><m:mi>j</m:mi></m:math> times the inverse hyperbolic cosine of 2, that
+is, <m:math><m:mrow><m:mi>j</m:mi><m:mo>·</m:mo><m:mn>1</m:mn><m:mo>.</m:mo><m:mn>31</m:mn></m:mrow></m:math>. Multiplying by M and taking the cosine of the
+product yields the cosine of <m:math><m:mrow><m:mi>j</m:mi><m:mi>M</m:mi><m:mi>x</m:mi></m:mrow></m:math>, which is the hyperbolic cosine of <m:math><m:mrow><m:mi>M</m:mi><m:mi>x</m:mi></m:mrow></m:math>.
+Thus, if imaginary arguments are permitted, then <link target-id="uid4"/>
+suffices to describe all of the Chebyshev polynomials.</para>
+    </section>
+  </content>
+</document>

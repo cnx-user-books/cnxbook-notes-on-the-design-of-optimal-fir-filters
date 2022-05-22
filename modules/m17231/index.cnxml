@@ -1,0 +1,27 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Introduction to "Notes on the Design of Optimal FIR Filters"</title>
+  <metadata>
+  <md:content-id>m17231</md:content-id><md:title>Introduction to "Notes on the Design of Optimal FIR Filters"</md:title>
+  <md:abstract/>
+  <md:uuid>00deaf9e-985b-45c5-8608-c09af98c5048</md:uuid>
+</metadata>
+
+<content>
+    <para id="id2255537"><title>Introduction</title>A recurring technical task in the development of digital signal processing products and systems
+is the design of finite-impulse-response (FIR) digital filters.
+Fortunately some excellent software packages exist for the automatic
+synthesis of impulse responses for such filters, many of them based on
+the now-famous Parks-McClellan algorithm [2]. Unfortunately, there is still
+some mystery about how to use the software and, equally important, how to
+estimate impulse response lengths short of actually designing the filter
+itself. This technical note primarily addresses the second problem and
+indirectly discusses a bit
+the first. We examine here how to convert a typical filter specification in
+terms of cutoff frequency, passband ripple, etc., into a reasonably
+accurate estimate of the
+length of the impulse response. Not only does this estimate suffice for
+most design tradeoff exercises, it usually allows the Parks-McClellan routines
+to be employed only once or twice rather than the multiple times needed
+when the “cut-and-try" method is used.</para>
+  </content>
+</document>

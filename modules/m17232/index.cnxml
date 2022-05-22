@@ -1,0 +1,255 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Statement of the Optimal Linear Phase FIR Filter Design Problem</title>
+  <metadata>
+  <md:content-id>m17232</md:content-id><md:title>Statement of the Optimal Linear Phase FIR Filter Design Problem</md:title>
+  <md:abstract/>
+  <md:uuid>cca05b25-a0e6-42f1-8135-3d3edf59bc76</md:uuid>
+</metadata>
+
+<content>
+    <section id="uid1">
+      <title>Equal-ripple Design</title>
+      <para id="id2255547">While other types of filters are often of interest, this note focuses on the
+lowpass linear phase filter. Even though it is not immediately obvious, virtually
+all of the analytical results developed in this note apply to the other types
+as well. This fact is amplified in the module <link document="m17235">Extension to Non-lowpass Filters</link>.
+
+
+
+</para>
+      <para id="id2255562">It is known that the Parks-McClellan filter synthesis software package produces
+“optimal" filters in the sense that the best possible filter performance is
+attained for the number of “filter taps" allowed by the designer. “Optimal"
+can be defined various ways. The Parks-McClellan package uses the Remez
+exchange algorithm to optimize the filter design by selecting the impulse
+response of given length, termed here <m:math><m:mi>N</m:mi></m:math>, which minimizes the peak ripple in
+the passband and stopband. It can be shown, though not here, that minimizing
+the peak, or maximum, ripple is equivalent to making all of the local peaks
+in the ripple equal to each other. This fact leads to three different names for
+essentially the same filter design. They are commonly called “equal-ripple"
+filters, because the local peaks are equal in deviation from the desired filter
+response. Because the maximum ripple deviation is minimized in this optimization
+procedure, they are also termed “minimax" filters. Finally, since the Russian
+Chebyshev is usually associated with minimax designs
+
+<footnote id="id1172395532804">He developed the
+concept of minimax design and a set of polynomials which carry his name not from
+filter design, but from the optimal design of piston drive rods for steam
+locomotives. They are discussed more in <link document="m17234">"Filter Sizing"</link> 
+and
+<link document="m17238">Appendix B</link>.</footnote>,
+
+
+ these filters are often given his name.</para>
+      <para id="id2255630">The design template for an equal-ripple lowpass filter is shown in
+<link target-id="uid3"/>.</para>
+      <figure id="uid3" orient="horizontal">
+        <media id="id7254668" alt=""><image src="../../media/fig1.png" mime-type="image/png" width="300"/><image for="pdf" src="../../media/fig1.eps" mime-type="application/postscript"/></media>
+        <caption>Frequency Response of an Optimal Weighted Equal-ripple Linear
+Phase FIR Filter</caption>
+      </figure>
+      <para id="id2255651">The passband extends from 0 Hz to the cutoff frequency denoted <m:math><m:msub><m:mi>f</m:mi><m:mi>c</m:mi></m:msub></m:math>.
+The gain in the passband is assumed to be unity. Any other gain is
+attained by scaling the whole impulse response appropriately. The stopband
+begins at the frequency denoted <m:math><m:msub><m:mi>f</m:mi><m:mrow><m:mi>s</m:mi><m:mi>t</m:mi></m:mrow></m:msub></m:math> and ends at the so-called Nyquist
+or “folding" frequency, denoted by <m:math><m:mfrac><m:msub><m:mi>f</m:mi><m:mi>s</m:mi></m:msub><m:mn>2</m:mn></m:mfrac></m:math>, where <m:math><m:msub><m:mi>f</m:mi><m:mi>s</m:mi></m:msub></m:math> is the
+sampling frequency of the data entering the digital filter. In some
+references, [1] for example, the sampling rate <m:math><m:msub><m:mi>f</m:mi><m:mi>s</m:mi></m:msub></m:math> is assumed to be
+normalized to unity just as the passband gain has here. The dependence on
+the sampling frequency is kept explicit in this note, however, so that its
+impact on design parameters can be kept visible.</para>
+      <para id="id2255746">The optimal synthesis algorithm is assumed here to produce an impulse response
+whose associated frequency response has ripples in both the passband
+and the stopband. The peak deviation in the passband is denoted <m:math><m:msub><m:mi>δ</m:mi><m:mn>1</m:mn></m:msub></m:math>
+and the peak deviation in the stopband is denoted <m:math><m:msub><m:mi>δ</m:mi><m:mn>2</m:mn></m:msub></m:math>. It is commonly
+thought that an “equal-ripple" design forces <m:math><m:msub><m:mi>δ</m:mi><m:mn>1</m:mn></m:msub></m:math> to equal <m:math><m:msub><m:mi>δ</m:mi><m:mn>2</m:mn></m:msub></m:math>.
+In fact this is not true. The local ripple peaks in the passband will all
+equal <m:math><m:msub><m:mi>δ</m:mi><m:mn>1</m:mn></m:msub></m:math> and those in the stopband will all equal <m:math><m:msub><m:mi>δ</m:mi><m:mn>2</m:mn></m:msub></m:math>. For
+a given filter specification the two are linked together by a weight denoted
+<m:math><m:mi>W</m:mi></m:math>, so that <m:math><m:mrow><m:msub><m:mi>δ</m:mi><m:mn>1</m:mn></m:msub><m:mo>=</m:mo><m:mi>W</m:mi><m:msub><m:mi>δ</m:mi><m:mn>2</m:mn></m:msub></m:mrow></m:math>. In fact the Parks-McClellan routines
+insure the design of <emphasis>weighted equal-ripple</emphasis> filters. The choice of <m:math><m:mi>W</m:mi></m:math> is
+discussed shortly.</para>
+      <para id="id2255896">An important design parameter is the <emphasis>transition band</emphasis>, denoted <m:math><m:mrow><m:mi>Δ</m:mi><m:mi>f</m:mi></m:mrow></m:math>,
+and defined as the difference between the stopband edge <m:math><m:msub><m:mi>f</m:mi><m:mrow><m:mi>s</m:mi><m:mi>t</m:mi></m:mrow></m:msub></m:math> and the
+passband edge <m:math><m:msub><m:mi>f</m:mi><m:mi>c</m:mi></m:msub></m:math>. Thus,</para>
+      <equation id="id2255950">
+        <m:math mode="display">
+          <m:mrow>
+            <m:mi>Δ</m:mi>
+            <m:mi>f</m:mi>
+            <m:mo>=</m:mo>
+            <m:msub>
+              <m:mi>f</m:mi>
+              <m:mrow>
+                <m:mi>s</m:mi>
+                <m:mi>t</m:mi>
+              </m:mrow>
+            </m:msub>
+            <m:mspace width="3.33333pt"/>
+            <m:mo>-</m:mo>
+            <m:mspace width="3.33333pt"/>
+            <m:msub>
+              <m:mi>f</m:mi>
+              <m:mi>c</m:mi>
+            </m:msub>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2255995">In theory the required filter order <m:math><m:mi>N</m:mi></m:math> is a function of all of the
+design parameters defined so far, that is, <m:math><m:mrow><m:msub><m:mi>f</m:mi><m:mi>s</m:mi></m:msub><m:mo>,</m:mo><m:msub><m:mi>f</m:mi><m:mi>c</m:mi></m:msub><m:mo>,</m:mo><m:msub><m:mi>f</m:mi><m:mrow><m:mi>s</m:mi><m:mi>t</m:mi></m:mrow></m:msub><m:mo>,</m:mo><m:msub><m:mi>δ</m:mi><m:mn>1</m:mn></m:msub></m:mrow></m:math>, and <m:math><m:msub><m:mi>δ</m:mi><m:mn>2</m:mn></m:msub></m:math>. The central point of this technical note is
+that under a large range of practical circumstances the required value of
+<m:math><m:mi>N</m:mi></m:math> can be estimated using only <m:math><m:mrow><m:msub><m:mi>f</m:mi><m:mi>s</m:mi></m:msub><m:mo>,</m:mo><m:mi>Δ</m:mi><m:mi>f</m:mi></m:mrow></m:math>, and the smaller of
+<m:math><m:msub><m:mi>δ</m:mi><m:mn>1</m:mn></m:msub></m:math> and <m:math><m:msub><m:mi>δ</m:mi><m:mn>2</m:mn></m:msub></m:math>.</para>
+    </section>
+    <section id="uid4">
+      <title>Conversion of Specifications</title>
+      <para id="id2256142">While the parameters defined in the previous section relate directly
+to the theory of FIR filter design optimization, some of them differ
+from those usually employed to specify the performance of a filter. We
+discuss here the conversion of two of those, <m:math><m:msub><m:mi>δ</m:mi><m:mn>1</m:mn></m:msub></m:math> and <m:math><m:msub><m:mi>δ</m:mi><m:mn>2</m:mn></m:msub></m:math>,
+into more traditional measures.</para>
+      <para id="id2256178"><term>Passband Ripple</term>:
+ <link target-id="uid3"/> uses the
+parameter <m:math><m:msub><m:mi>δ</m:mi><m:mn>1</m:mn></m:msub></m:math> to describe the peak difference between the template
+lowpass filter and the magnitude of the filter response actually attained.
+Traditionally this passband ripple has been specified in terms of the
+maximum difference in the power level transmitted through the filter in
+the passband. By this definition, the peak-to-peak
+passband ripple, abbreviated here as
+PBR, is given by</para>
+      <equation id="uid5">
+        <m:math mode="display">
+          <m:mrow>
+            <m:mi>P</m:mi>
+            <m:mi>B</m:mi>
+            <m:mi>R</m:mi>
+            <m:mo>=</m:mo>
+            <m:mn>10</m:mn>
+            <m:mspace width="3.33333pt"/>
+            <m:mi>l</m:mi>
+            <m:mi>o</m:mi>
+            <m:msub>
+              <m:mi>g</m:mi>
+              <m:mn>10</m:mn>
+            </m:msub>
+            <m:mfrac>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>(</m:mo>
+                  <m:mn>1</m:mn>
+                  <m:mo>+</m:mo>
+                  <m:msub>
+                    <m:mi>δ</m:mi>
+                    <m:mn>1</m:mn>
+                  </m:msub>
+                  <m:mo>)</m:mo>
+                </m:mrow>
+                <m:mn>2</m:mn>
+              </m:msup>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>(</m:mo>
+                  <m:mn>1</m:mn>
+                  <m:mo>-</m:mo>
+                  <m:msub>
+                    <m:mi>δ</m:mi>
+                    <m:mn>1</m:mn>
+                  </m:msub>
+                  <m:mo>)</m:mo>
+                </m:mrow>
+                <m:mn>2</m:mn>
+              </m:msup>
+            </m:mfrac>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2256541">Assuming that the nominal power transmission through the filter is unity,
+the numerator is the power gain at a ripple peak and the denominator is
+the gain at a trough. It is easily shown (see <link document="m17237">Appendix A</link>)
+
+
+that when <m:math><m:msub><m:mi>δ</m:mi><m:mn>1</m:mn></m:msub></m:math> is small compared to unity, or, equivalently, when the
+passband ripple is less than about 1.5 dB, then
+
+<footnote id="id1172389833006">Strictly speaking,
+the peak ripple excursions are equal in magnitude, not in decibels. This
+subtlety is completely negligible for small values of <m:math><m:msub><m:mi>δ</m:mi><m:mn>1</m:mn></m:msub></m:math>.</footnote>
+
+<!-- REPLACE <cnxn target=""Notes on the Design of Optimal FIR Filters" APPENDIX A"/> --></para>
+      <equation id="id2256592">
+        <m:math mode="display">
+          <m:mrow>
+            <m:mi>P</m:mi>
+            <m:mi>B</m:mi>
+            <m:mi>R</m:mi>
+            <m:mspace width="3.33333pt"/>
+            <m:mo>≈</m:mo>
+            <m:mspace width="3.33333pt"/>
+            <m:mn>17</m:mn>
+            <m:mo>.</m:mo>
+            <m:mn>36</m:mn>
+            <m:mspace width="3.33333pt"/>
+            <m:msub>
+              <m:mi>δ</m:mi>
+              <m:mn>1</m:mn>
+            </m:msub>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2256635"><term>Stopband Ripple</term>:
+ The traditional specification for
+stopband ripple, abbreviated here as SBR, is the power difference between
+the nominal passband transmission level and the transmission level of the
+highest ripple in the stopband. For the equal ripple design shown in
+<link target-id="uid3"/>, all stopband ripples have equal peak values and
+the nominal passband transmission is unity, that is, 0 dB. The stopband
+ripple, or more accurately, the minimum stopband power rejection, denoted
+SBR, is given by</para>
+      <equation id="uid7">
+        <m:math mode="display">
+          <m:mrow>
+            <m:mi>S</m:mi>
+            <m:mi>B</m:mi>
+            <m:mi>R</m:mi>
+            <m:mspace width="3.33333pt"/>
+            <m:mo>=</m:mo>
+            <m:mspace width="3.33333pt"/>
+            <m:mn>20</m:mn>
+            <m:mspace width="3.33333pt"/>
+            <m:mi>l</m:mi>
+            <m:mi>o</m:mi>
+            <m:msub>
+              <m:mi>g</m:mi>
+              <m:mn>10</m:mn>
+            </m:msub>
+            <m:msub>
+              <m:mi>δ</m:mi>
+              <m:mn>2</m:mn>
+            </m:msub>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      
+      <example id="element-456"><para id="element-127">Suppose a filter is specified to have a peak-to-peak
+passband ripple of 0.5 dB and a minimum stopband attenuation of 60 dB.
+Using the above equations we find that <m:math><m:mrow><m:msub><m:mi>δ</m:mi><m:mn>1</m:mn></m:msub><m:mo>=</m:mo><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>0288</m:mn></m:mrow></m:math>,
+<m:math><m:mrow><m:msub><m:mi>δ</m:mi><m:mn>2</m:mn></m:msub><m:mo>=</m:mo><m:mo>.</m:mo><m:mn>001</m:mn></m:mrow></m:math>, and the relative weighting, <m:math><m:mi>W</m:mi></m:math>, therefore equals 28.8.
+<m:math><m:mrow><m:mspace width="3.33333pt"/><m:mspace width="3.33333pt"/><m:mo>♠</m:mo></m:mrow></m:math>
+</para>
+</example><para id="id2256803">In discussing filter specifications it should be noted that the cutoff
+frequency <m:math><m:msub><m:mi>f</m:mi><m:mi>c</m:mi></m:msub></m:math> shown in <link target-id="uid3"/> differs from the
+definition typically used in analog filter designs. The cutoff
+frequency is commonly defined as the
+<emphasis>3 dB point</emphasis>, that is,
+that frequency at which the power transfer function falls
+to a value 3 dB below the nominal passband level. Instead the value of <m:math><m:msub><m:mi>f</m:mi><m:mi>c</m:mi></m:msub></m:math>
+shown in <link target-id="uid3"/> is the highest frequency at which the
+specified passband ripple is still attained. In very few practical cases do the
+two definitions result in the same value.</para>
+    </section>
+  </content>
+</document>

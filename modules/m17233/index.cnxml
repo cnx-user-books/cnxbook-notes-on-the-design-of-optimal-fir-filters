@@ -1,0 +1,124 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Three Methods of Designing FIR Filters</title>
+  <metadata>
+  <md:content-id>m17233</md:content-id><md:title>Three Methods of Designing FIR Filters</md:title>
+  <md:abstract/>
+  <md:uuid>1a28dd5c-a0a0-4922-bb0f-49aaf4019304</md:uuid>
+</metadata>
+
+<content>
+
+      
+      <para id="id2255548">The module <link document="m17240">"Performance Comparison with other FIR Design Methods"</link>
+
+alluded to the fact that three basic methods have
+traditionally been used for the design of FIR digital filters.
+
+
+ <link document="m17240" target-id="uid3"> Figure 1 in the module titled "Performance Comparison with other FIR Design Methods"</link>
+
+in fact compares their relative performance
+in terms of the value of <m:math><m:mi>α</m:mi></m:math> (which was shown to be proportional
+to the filter's required run-time
+computation rate). Given the background of the
+previous subsection it is now possible to understand each of the methods
+and to gain some insight into the differences between their performance.</para>
+      <section id="uid2">
+        <title>Window-based Filters</title>
+        <para id="id2255582">As described earlier, one of the first class of FIR filters is that
+based on the use of a “smoothing window". This window, constructed to
+have only N non-zero points, is multiplied point-by-point by an
+impulse response of infinite duration which has the “perfect"
+frequency response. This multiplication or <emphasis>windowing</emphasis>
+has the effect of making the
+filter impulse response finite in duration (hence FIR), but also has the
+effect of smearing the desired frequency response.</para>
+        <figure id="uid3" orient="horizontal">
+          <media id="id3326099" alt=""><image src="../../media/fig9.png" mime-type="image/png" width="253"/><image for="pdf" src="../../media/fig9.eps" mime-type="application/postscript"/></media>
+          <caption>The Effect of a Window Function on the Basis Filter</caption>
+        </figure>
+        <para id="id2255614">The stopband ripple specification is obtained by using a window capable
+of suppressing all sidelobes to the desired degree. This can be seen in
+<link target-id="uid3"/>. The windowed filter basis function has
+substantially lower sidelobes than the original <m:math><m:mfrac><m:mrow><m:mi>s</m:mi><m:mi>i</m:mi><m:mi>n</m:mi><m:mspace width="3.33333pt"/><m:mi>N</m:mi><m:mi>q</m:mi></m:mrow><m:mrow><m:mi>s</m:mi><m:mi>i</m:mi><m:mi>n</m:mi><m:mspace width="3.33333pt"/><m:mi>q</m:mi></m:mrow></m:mfrac></m:math>
+filter basis function, in trade for substantial widening of the main lobe. This
+widening means growth in the equivalent design parameter <m:math><m:mi>α</m:mi></m:math> and is
+monotonic with the degree of sidelobe suppression attained.</para>
+        <para id="id2255679">It should also be observed that the sidelobe reduction has the effect of
+reducing the ripple in the passband as well as in the stopband. Thus
+some of the filter's degrees of freedom are given up in perhaps overdesigning
+the passband response rather than focusing them on the stopband
+performance.</para>
+      </section>
+      <section id="uid4">
+        <title>Frequency Sampling Design</title>
+        <para id="id2255695">In the simplest DFT-based FIR filter design method, the desired frequency
+response is sampled at frequency intervals of <m:math><m:mfrac><m:msub><m:mi>f</m:mi><m:mi>s</m:mi></m:msub><m:mi>N</m:mi></m:mfrac></m:math> Hertz
+and the filter gains <m:math><m:msub><m:mover accent="true"><m:mi>h</m:mi><m:mo>^</m:mo></m:mover><m:mi>n</m:mi></m:msub></m:math> are set to those values. This is
+in essence the method used for the simple lowpass filter shown in 
+
+<link document="m17240" target-id="uid10"> Figure 4 from the module titled"Performance Comparison with other FIR Design Methods"</link>.
+
+The big advantages of this method are its
+simplicity and the fact that any desired response, no matter how
+complicated, can be approximated. The big disadvantage is its uncontrolled
+ripple performance in both the stopband and passband. The traditional cures for
+this are the use of a window function to suppress the ripple and the
+expansion of the filter order N to compensate for the window's smearing of
+the desired response. Increasing <m:math><m:mi>N</m:mi></m:math>, of course, increases the filter's
+run-time computation rate.</para>
+        <para id="id2255764">Relatively early in the development of FIR design techniques it was
+discovered that much better adherence to the desired frequency
+response could be attained by allowing some of the basis filter
+gains <m:math><m:msub><m:mover accent="true"><m:mi>h</m:mi><m:mo>^</m:mo></m:mover><m:mi>n</m:mi></m:msub></m:math> to vary slightly from the exact sampled values
+(e.g., 1 and 0 for a lowpass filter). This idea is shown in
+<link target-id="uid5"/>. A simple lowpass filter is the desired
+response. Solid dots show the frequency samples of this desired response
+taken every <m:math><m:mfrac><m:msub><m:mi>f</m:mi><m:mi>s</m:mi></m:msub><m:mi>N</m:mi></m:mfrac></m:math> Hertz. These samples have values of
+1 and 0 for <m:math><m:msub><m:mover accent="true"><m:mi>h</m:mi><m:mo>^</m:mo></m:mover><m:mi>n</m:mi></m:msub></m:math> in the passband and stopband respectively.
+Now suppose that the values of <m:math><m:msub><m:mover accent="true"><m:mi>h</m:mi><m:mo>^</m:mo></m:mover><m:mi>n</m:mi></m:msub></m:math> for <m:math><m:mi>n</m:mi></m:math> in the vicinity of
+the cutoff frequency <m:math><m:msub><m:mi>f</m:mi><m:mi>c</m:mi></m:msub></m:math> are allowed to be modified slightly with the
+goal of minimizing the peak stopband ripple. These values of <m:math><m:mi>n</m:mi></m:math>
+are denoted with small circles instead of solid dots in
+<link target-id="uid5"/>. Rabiner and his coworkers [4] showed in
+1970 that it was possible to use the linear programming optimization
+technique to manipulate two or three of the filter gains to obtain
+great improvement in stopband ripple performance. The computational
+complexity of the linear programming method, however, limited the
+number of the <m:math><m:msub><m:mover accent="true"><m:mi>h</m:mi><m:mo>^</m:mo></m:mover><m:mi>n</m:mi></m:msub></m:math> which could be so chosen.</para>
+        <figure id="uid5" orient="horizontal">
+          <media id="id3250569" alt=""><image src="../../media/fig10.png" mime-type="image/png" width="288"/><image for="pdf" src="../../media/fig10.eps" mime-type="application/postscript"/></media>
+          <caption>Comparison of “Frequency Sampling" and Equal-ripple Design</caption>
+        </figure>
+      </section>
+      <section id="uid6">
+        <title>Equiripple Design</title>
+        <para id="id2255947">It was generally known in 1971 that equal-ripple passband and stopband
+behavior would lead to the best filter performance, where “best" means
+the smallest transition band (and hence <m:math><m:mi>α</m:mi></m:math>) for a given set of
+peak passband and stopband ripple specifications. In fact a great deal was
+known about the properties of such filters. What was lacking was a
+computationally satisfactory method of designing such optimal filters.
+As just noted, the linear programming technique provided a big step but still
+fell short. The breakthrough came in two parts. Several workers, but
+principally Parks, McClellan (Parks' graduate student), and Rabiner
+showed that four different variants of FIR linear phase filters could
+all be represented by the same set of equations<footnote id="id3953100">The variants are
+odd and even filter order and symmetric and antisymmetric impulse responses.</footnote>
+and could therefore be solved the same way. The second part was
+Parks' suggestion of using the the Remez exchange algorithm for doing
+the actual optimization. The Remez exchange algorithm effectively allows
+all degrees of freedom in the filter impulse response to be adjusted
+simultaneously while the linear programming technique allows the adjustment
+of only one at a time. For high order filters this distinction makes a
+tremendous difference in the number of computations needed to iteratively
+optimize a design. Refering again to <link target-id="uid5"/>,
+the Remez algorithm allows all of the frequency samples to be modified,
+even for filter orders as high as <m:math><m:mrow><m:mi>N</m:mi><m:mo>=</m:mo><m:mn>1000</m:mn></m:mrow></m:math> or more, thus permitting the best possible
+filter performance to be achieved. McClellan also proved that the linear
+phase FIR filter design problem satisfied the conditions needed to guarantee
+convergence of the Remez algorithm.</para>
+      </section>
+
+  </content>
+</document>

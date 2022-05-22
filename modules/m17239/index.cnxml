@@ -1,0 +1,417 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>"Notes on the Design of Optimal FIR Filters" Appendix C</title>
+  <metadata>
+  <md:content-id>m17239</md:content-id><md:title>"Notes on the Design of Optimal FIR Filters" Appendix C</md:title>
+  <md:abstract/>
+  <md:uuid>bc394cc6-ffad-4f75-b8f9-94eb102ccd5c</md:uuid>
+</metadata>
+
+<content>
+    <section id="uid1">
+      <title>Using a Chebyshev Polynomial to Estimate <!--Math is not currently allowed in CNXML section title.--></title>
+      <para id="id2255561">We desire that the oscillatory portion of the polynomial shown in
+
+<link document="m17234" target-id="uid7">Figure 1 in the module titled "Filter Sizing"</link>
+
+correspond to the
+stopband region of the filter response and the <m:math><m:msup><m:mi>x</m:mi><m:mi>M</m:mi></m:msup></m:math> portion to correspond
+to the transition from the stopband to the passband. This is achieved by
+employing a change of variables from frequency <m:math><m:mi>f</m:mi></m:math> to the polynomial
+argument <m:math><m:mi>x</m:mi></m:math>:</para>
+      <equation id="uid2">
+        <m:math mode="display">
+          <m:mrow>
+            <m:mi>x</m:mi>
+            <m:mo>=</m:mo>
+            <m:mrow>
+              <m:mo>(</m:mo>
+              <m:mfrac>
+                <m:mrow>
+                  <m:msub>
+                    <m:mi>x</m:mi>
+                    <m:mn>0</m:mn>
+                  </m:msub>
+                  <m:mo>+</m:mo>
+                  <m:mn>1</m:mn>
+                </m:mrow>
+                <m:mn>2</m:mn>
+              </m:mfrac>
+              <m:mo>)</m:mo>
+            </m:mrow>
+            <m:mi>c</m:mi>
+            <m:mi>o</m:mi>
+            <m:mi>s</m:mi>
+            <m:mrow>
+              <m:mo>(</m:mo>
+              <m:mfrac>
+                <m:mrow>
+                  <m:mn>2</m:mn>
+                  <m:mi>π</m:mi>
+                  <m:mi>f</m:mi>
+                </m:mrow>
+                <m:msub>
+                  <m:mi>f</m:mi>
+                  <m:mi>s</m:mi>
+                </m:msub>
+              </m:mfrac>
+              <m:mo>)</m:mo>
+            </m:mrow>
+            <m:mo>+</m:mo>
+            <m:mrow>
+              <m:mo>(</m:mo>
+              <m:mfrac>
+                <m:mrow>
+                  <m:msub>
+                    <m:mi>x</m:mi>
+                    <m:mn>0</m:mn>
+                  </m:msub>
+                  <m:mo>-</m:mo>
+                  <m:mn>1</m:mn>
+                </m:mrow>
+                <m:mn>2</m:mn>
+              </m:mfrac>
+              <m:mo>)</m:mo>
+            </m:mrow>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2255706">While many different types of variable changes could be employed, this one
+matches the boundary conditions (an obvious requirement) but happens to
+employ the cosine function, a member of the same family used to define the
+Chebyshev polynomials.</para>
+      <para id="id2255714">With this change of variables we see that the transition band <m:math><m:mrow><m:mi>Δ</m:mi><m:mi>f</m:mi></m:mrow></m:math> is
+defined by the difference between <m:math><m:mrow><m:mi>x</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow></m:math> and <m:math><m:mrow><m:mi>x</m:mi><m:mo>=</m:mo><m:msub><m:mi>x</m:mi><m:mi>p</m:mi></m:msub></m:mrow></m:math>. Using the closed, but
+nonintuitive form of the K-th order Chebyshev polynomial, valid for
+<m:math><m:mrow><m:mo>|</m:mo><m:mi>x</m:mi><m:mo>|</m:mo><m:mo>&gt;</m:mo><m:mn>1</m:mn></m:mrow></m:math>, we have that</para>
+      <equation id="uid3">
+        <m:math mode="display">
+          <m:mrow>
+            <m:msub>
+              <m:mi>P</m:mi>
+              <m:mi>K</m:mi>
+            </m:msub>
+            <m:mrow>
+              <m:mo>(</m:mo>
+              <m:mi>x</m:mi>
+              <m:mo>)</m:mo>
+            </m:mrow>
+            <m:mo>=</m:mo>
+            <m:mi>c</m:mi>
+            <m:mi>o</m:mi>
+            <m:mi>s</m:mi>
+            <m:mi>h</m:mi>
+            <m:mrow>
+              <m:mo>(</m:mo>
+              <m:mi>K</m:mi>
+              <m:mo>·</m:mo>
+              <m:mi>c</m:mi>
+              <m:mi>o</m:mi>
+              <m:mi>s</m:mi>
+              <m:msup>
+                <m:mi>h</m:mi>
+                <m:mrow>
+                  <m:mo>-</m:mo>
+                  <m:mn>1</m:mn>
+                </m:mrow>
+              </m:msup>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi>x</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>)</m:mo>
+            </m:mrow>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2256096">To synthesize the desired impulse response using this windowing technique we
+multiply the resulting window function by the sampled sinc function. In this
+case, however, we desire that the cutoff frequency be as low as possible,
+limiting at zero Hz. The associated sinc function equals unity for all
+non-zero
+coefficients of the impulse response. Since the final impulse response is
+the point-by-point product of the window and the sampled sinc function, in
+this case the window itself is the resulting impulse response. It suffices then
+to examine the properties of the N-th order
+Chebyshev polynomial to see how the N-point optimal filter will behave.</para>
+      <para id="id2256121">To find the relationship between the required filter order <m:math><m:mi>N</m:mi></m:math> and the
+attainable transition band <m:math><m:mrow><m:mi>Δ</m:mi><m:mi>f</m:mi></m:mrow></m:math>, we first determine the proper
+value of <m:math><m:mi>K</m:mi></m:math> and
+then evaluate <link target-id="uid3"/> at the known combinations of
+<m:math><m:mi>x</m:mi></m:math> and <m:math><m:mrow><m:msub><m:mi>P</m:mi><m:mi>K</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math>. To select <m:math><m:mi>K</m:mi></m:math> we note that all but one of the ripples in
+the polynomial's response are used in the stopband and these are split
+evenly between the positive and negative frequencies. Thus a filter and
+window of order <m:math><m:mi>N</m:mi></m:math> implies a Chebyshev polynomial of order</para>
+      <equation id="id2256213">
+        <m:math mode="display">
+          <m:mrow>
+            <m:mi>K</m:mi>
+            <m:mo>=</m:mo>
+            <m:mfrac>
+              <m:mrow>
+                <m:mi>N</m:mi>
+                <m:mo>-</m:mo>
+                <m:mn>1</m:mn>
+              </m:mrow>
+              <m:mn>2</m:mn>
+            </m:mfrac>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2256239">With this resolved we observe from <link document="m17234" target-id="uid7">Figure 1 in the module titled "Filter Sizing"</link>
+
+that</para>
+      <equation id="id2256248">
+        <m:math mode="display">
+          <m:mrow>
+            <m:msub>
+              <m:mi>P</m:mi>
+              <m:mfrac>
+                <m:mrow>
+                  <m:mi>N</m:mi>
+                  <m:mo>-</m:mo>
+                  <m:mn>1</m:mn>
+                </m:mrow>
+                <m:mn>2</m:mn>
+              </m:mfrac>
+            </m:msub>
+            <m:mrow>
+              <m:mo>(</m:mo>
+              <m:mn>1</m:mn>
+              <m:mo>)</m:mo>
+            </m:mrow>
+            <m:mo>=</m:mo>
+            <m:mn>1</m:mn>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <equation id="id2256286">
+        <m:math mode="display">
+          <m:mrow>
+            <m:msub>
+              <m:mi>P</m:mi>
+              <m:mfrac>
+                <m:mrow>
+                  <m:mi>N</m:mi>
+                  <m:mo>-</m:mo>
+                  <m:mn>1</m:mn>
+                </m:mrow>
+                <m:mn>2</m:mn>
+              </m:mfrac>
+            </m:msub>
+            <m:mrow>
+              <m:mo>(</m:mo>
+              <m:msub>
+                <m:mi>x</m:mi>
+                <m:mi>p</m:mi>
+              </m:msub>
+              <m:mo>)</m:mo>
+            </m:mrow>
+            <m:mo>=</m:mo>
+            <m:mfrac>
+              <m:mrow>
+                <m:mn>1</m:mn>
+                <m:mo>-</m:mo>
+                <m:msub>
+                  <m:mi>δ</m:mi>
+                  <m:mn>1</m:mn>
+                </m:msub>
+              </m:mrow>
+              <m:msub>
+                <m:mi>δ</m:mi>
+                <m:mn>2</m:mn>
+              </m:msub>
+            </m:mfrac>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <equation id="id2256350">
+        <m:math mode="display">
+          <m:mrow>
+            <m:msub>
+              <m:mi>P</m:mi>
+              <m:mfrac>
+                <m:mrow>
+                  <m:mi>N</m:mi>
+                  <m:mo>-</m:mo>
+                  <m:mn>1</m:mn>
+                </m:mrow>
+                <m:mn>2</m:mn>
+              </m:mfrac>
+            </m:msub>
+            <m:mrow>
+              <m:mo>(</m:mo>
+              <m:msub>
+                <m:mi>x</m:mi>
+                <m:mn>0</m:mn>
+              </m:msub>
+              <m:mo>)</m:mo>
+            </m:mrow>
+            <m:mo>=</m:mo>
+            <m:mfrac>
+              <m:mrow>
+                <m:mn>1</m:mn>
+                <m:mo>+</m:mo>
+                <m:msub>
+                  <m:mi>δ</m:mi>
+                  <m:mn>1</m:mn>
+                </m:msub>
+              </m:mrow>
+              <m:msub>
+                <m:mi>δ</m:mi>
+                <m:mn>2</m:mn>
+              </m:msub>
+            </m:mfrac>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2256414">These equations are manipulated to yield an expression for <m:math><m:msub><m:mi>x</m:mi><m:mi>p</m:mi></m:msub></m:math>.
+<link target-id="uid2"/> is then used to obtain values for <m:math><m:msub><m:mi>f</m:mi><m:mrow><m:mi>s</m:mi><m:mi>t</m:mi></m:mrow></m:msub></m:math>,
+corresponding to <m:math><m:mrow><m:mi>x</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow></m:math>, and <m:math><m:msub><m:mi>f</m:mi><m:mi>c</m:mi></m:msub></m:math>, corresponding to <m:math><m:mrow><m:mi>x</m:mi><m:mo>=</m:mo><m:msub><m:mi>x</m:mi><m:mi>p</m:mi></m:msub></m:mrow></m:math>. Their
+difference, defined earlier to be the transition band <m:math><m:mrow><m:mi>Δ</m:mi><m:mi>f</m:mi></m:mrow></m:math>, is then
+given by</para>
+      <equation id="uid4">
+        <m:math mode="display">
+          <m:mrow>
+            <m:mi>Δ</m:mi>
+            <m:mi>f</m:mi>
+            <m:mo>=</m:mo>
+            <m:mfrac>
+              <m:msub>
+                <m:mi>f</m:mi>
+                <m:mi>s</m:mi>
+              </m:msub>
+              <m:mrow>
+                <m:mi>π</m:mi>
+                <m:mo>(</m:mo>
+                <m:mi>N</m:mi>
+                <m:mo>-</m:mo>
+                <m:mn>1</m:mn>
+                <m:mo>)</m:mo>
+              </m:mrow>
+            </m:mfrac>
+            <m:mrow>
+              <m:mo>[</m:mo>
+              <m:mi>c</m:mi>
+              <m:mi>o</m:mi>
+              <m:mi>s</m:mi>
+              <m:msup>
+                <m:mi>h</m:mi>
+                <m:mrow>
+                  <m:mo>-</m:mo>
+                  <m:mn>1</m:mn>
+                </m:mrow>
+              </m:msup>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mfrac>
+                  <m:mrow>
+                    <m:mn>1</m:mn>
+                    <m:mo>+</m:mo>
+                    <m:msub>
+                      <m:mi>δ</m:mi>
+                      <m:mn>1</m:mn>
+                    </m:msub>
+                  </m:mrow>
+                  <m:msub>
+                    <m:mi>δ</m:mi>
+                    <m:mn>2</m:mn>
+                  </m:msub>
+                </m:mfrac>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>-</m:mo>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>{</m:mo>
+                  <m:msup>
+                    <m:mrow>
+                      <m:mo>(</m:mo>
+                      <m:mi>c</m:mi>
+                      <m:mi>o</m:mi>
+                      <m:mi>s</m:mi>
+                      <m:msup>
+                        <m:mi>h</m:mi>
+                        <m:mrow>
+                          <m:mo>-</m:mo>
+                          <m:mn>1</m:mn>
+                        </m:mrow>
+                      </m:msup>
+                      <m:mrow>
+                        <m:mo>(</m:mo>
+                        <m:mfrac>
+                          <m:mrow>
+                            <m:mn>1</m:mn>
+                            <m:mo>+</m:mo>
+                            <m:msub>
+                              <m:mi>δ</m:mi>
+                              <m:mn>1</m:mn>
+                            </m:msub>
+                          </m:mrow>
+                          <m:msub>
+                            <m:mi>δ</m:mi>
+                            <m:mn>2</m:mn>
+                          </m:msub>
+                        </m:mfrac>
+                        <m:mo>)</m:mo>
+                      </m:mrow>
+                      <m:mo>)</m:mo>
+                    </m:mrow>
+                    <m:mn>2</m:mn>
+                  </m:msup>
+                  <m:mo>-</m:mo>
+                  <m:msup>
+                    <m:mrow>
+                      <m:mo>(</m:mo>
+                      <m:mi>c</m:mi>
+                      <m:mi>o</m:mi>
+                      <m:mi>s</m:mi>
+                      <m:msup>
+                        <m:mi>h</m:mi>
+                        <m:mrow>
+                          <m:mo>-</m:mo>
+                          <m:mn>1</m:mn>
+                        </m:mrow>
+                      </m:msup>
+                      <m:mrow>
+                        <m:mo>(</m:mo>
+                        <m:mfrac>
+                          <m:mrow>
+                            <m:mn>1</m:mn>
+                            <m:mo>-</m:mo>
+                            <m:msub>
+                              <m:mi>δ</m:mi>
+                              <m:mn>1</m:mn>
+                            </m:msub>
+                          </m:mrow>
+                          <m:msub>
+                            <m:mi>δ</m:mi>
+                            <m:mn>2</m:mn>
+                          </m:msub>
+                        </m:mfrac>
+                        <m:mo>)</m:mo>
+                      </m:mrow>
+                      <m:mo>)</m:mo>
+                    </m:mrow>
+                    <m:mn>2</m:mn>
+                  </m:msup>
+                  <m:mo>}</m:mo>
+                </m:mrow>
+                <m:mfrac>
+                  <m:mn>1</m:mn>
+                  <m:mn>2</m:mn>
+                </m:mfrac>
+              </m:msup>
+              <m:mo>]</m:mo>
+            </m:mrow>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2256743">Under suitable conditions this equation can be simplified considerably. For
+example, in the limits of small <m:math><m:msub><m:mi>δ</m:mi><m:mn>1</m:mn></m:msub></m:math> and large <m:math><m:mi>N</m:mi></m:math>, <link target-id="uid4"/> reduces to <link document="m17234" target-id="uid8">
+Equation 4 in the module titled "Filter Sizing"</link>.</para>
+    </section>
+  </content>
+</document>

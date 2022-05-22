@@ -1,0 +1,86 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+  <title>Bibliography for "Notes on the Design of Optimal FIR Filters"</title>
+  <metadata>
+  <md:content-id>m17236</md:content-id><md:title>Bibliography for "Notes on the Design of Optimal FIR Filters"</md:title>
+  <md:abstract/>
+  <md:uuid>6ad4fe37-f45e-4fba-ac8f-5f4075824319</md:uuid>
+</metadata>
+
+<content>
+    <section id="uid1">
+      <title>References</title>
+      <para id="id2255548"><!--<cnxn target="bid0"/>, <cnxn target="bid1"/>, <cnxn target="bid2"/>, <cnxn target="bid3"/>--></para>
+    </section>
+  </content>
+  <bib:file>
+
+    <bib:entry id="bid0">
+      <bib:book>
+<!--required fields-->
+        <bib:author>Rabiner, L.R. and Gold, B</bib:author>
+        <bib:title>Theory and Application of Digital Signal Processing</bib:title>
+        <bib:publisher>Prentice-Hall</bib:publisher>
+        <bib:year>1975</bib:year>
+<!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address/>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+
+    <bib:entry id="bid1">
+      <bib:article>
+<!--required fields-->
+        <bib:author>McClellan, J.H. et al.</bib:author>
+        <bib:title>A Computer Program for Designing Optimal FIR Linear Phase Digital Filters</bib:title>
+        <bib:journal>IEEE Transactions on Audio and Electroacoustics</bib:journal>
+        <bib:year>1973</bib:year>
+<!--optional fields-->
+        <bib:volume>AU-21</bib:volume>
+        <bib:number>6</bib:number>
+        <bib:pages>506-526</bib:pages>
+        <bib:month>Dec.</bib:month>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+
+    <bib:entry id="bid2">
+      <bib:book>
+<!--required fields-->
+        <bib:author>Crochiere, R.E. and Rabiner, L.R.</bib:author>
+        <bib:title>Multirate Digital Signal Processing</bib:title>
+        <bib:publisher>Prentice-Hall</bib:publisher>
+        <bib:year>1983</bib:year>
+<!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address/>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+
+
+    <bib:entry id="bid3">
+      <bib:article>
+<!--required fields-->
+        <bib:author>Rabiner, L.R. et al.</bib:author>
+        <bib:title>An Approach to the Approximation Problem for Nonrecursive Digital Filters</bib:title>
+        <bib:journal>IEEE Trans. Audio Electoacoustics</bib:journal>
+        <bib:year>1970</bib:year>
+<!--optional fields-->
+        <bib:volume>AU-18</bib:volume>
+        <bib:number/>
+        <bib:pages>83-106</bib:pages>
+        <bib:month>Jun.</bib:month>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+
+
+  </bib:file>
+</document>

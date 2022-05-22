@@ -1,0 +1,323 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Performance Comparsion with other FIR Design Methods</title>
+  <metadata>
+  <md:content-id>m17240</md:content-id><md:title>Performance Comparsion with other FIR Design Methods</md:title>
+  <md:abstract/>
+  <md:uuid>a985370f-625e-4594-ae0e-cce5b1c818d1</md:uuid>
+</metadata>
+
+<content>
+    <section id="uid1">
+      <title>Performance Comparsion with other FIR Design Methods</title>
+      <para id="id2255548">A commonly asked question among filter designers is why should the optimal
+design methods be used at all, or, equivalently, how much does the use of
+an optimal technique buy over some other conventional methods. This question
+is conveniently answered using <link target-id="uid3"/>, a figure extracted
+from [1] and modified to use the definitions of variables employed in this
+technical note. The figure shows the value of the design parameter <m:math><m:mi>α</m:mi></m:math>
+needed to attain a specific degree of stopband suppression in lowpass filters.
+Since the filter order <m:math><m:mi>N</m:mi></m:math> and therefore the amount of
+computation<footnote id="id1165243932873">The actual amount of computation depends on whether the
+data is real- or complex-valued, whether the impulse response symmetry is
+exploited, and whether interpolation or decimation is used. In all cases,
+however, <m:math><m:mi>R</m:mi></m:math> is proportional to <m:math><m:msub><m:mi>f</m:mi><m:mi>s</m:mi></m:msub></m:math> and <m:math><m:mi>α</m:mi></m:math>, and therefore
+<link target-id="uid3"/> provides an accurate indication of the relative
+computational complexity of the filters resulting from the different design
+methods.</footnote><m:math><m:mrow><m:mi>R</m:mi><m:mo>=</m:mo><m:mi>N</m:mi><m:msub><m:mi>f</m:mi><m:mi>s</m:mi></m:msub></m:mrow></m:math>
+are directly proportional to <m:math><m:mi>α</m:mi></m:math>, it serves as an excellent indicator
+for comparisons.</para>
+      <figure id="uid3" orient="horizontal">
+        <media id="id1165239362452" alt=""><image src="../../media/fig4.png" mime-type="image/png" width="427"/><image for="pdf" src="../../media/fig4.eps" mime-type="application/postscript"/></media>
+        <caption>Comparisons among Windowed, Frequency Sampling, and Optimal
+Lowpass Filters (drawn from [1])</caption>
+      </figure>
+      <para id="id2255683">Curves for three design methods are shown, windowing techniques, so-called
+“frequency sampling" techniques, and the optimal, equal-ripple design
+produced by the Parks-McClellan program. In each case there are some variations
+depending on the choice of design parameters other than stopband ripple. For
+example, the optimal technique shows a band of results indexed by the amount of
+passband ripple (hence <m:math><m:msub><m:mi>δ</m:mi><m:mn>1</m:mn></m:msub></m:math>) specified. The figure shows that, for
+modest degrees of stopband suppression, all of the methods work about
+equally well. For high degrees of suppression, however, the optimal technique
+allows values of <m:math><m:mi>α</m:mi></m:math> to be attained which are on the order of half of
+those attainable with the windowing methods and about 60-70% of the
+frequency sampling method. Since computation is directly proportional 
+to <m:math><m:mi>α</m:mi></m:math>, these saving are directly translatable into hardware and/or runtime
+improvements.</para>
+      <para id="id2255739">Why, one might ask, is the optimal method significantly better than, say,
+the window method? A fuller answer is presently shortly, but a simple one is
+that the optimal methods allow the designer to avoid overdesigning portions of
+the frequency response about which he or she needn't exert as much control. For
+example, recall the design example discussed in  <link document="m17232" target-id="id2256142"> the section "Conversion of Specifications" from the module titled "Statement of the Optimal Linear Phase FIR Filter Design Problem"</link>.
+
+In that case a set of reasonable specifications was developed which allowed
+the magnitude of the
+passband ripple to be almost 29 times larger than the stopband ripple. Since
+the Parks-McClellan design package allows the design of <emphasis>weighted</emphasis>
+equal-ripple filters this disparity can be accommodated.
+Window-designed filters,
+however, are constrained to have exactly the same passband ripple <m:math><m:msub><m:mi>δ</m:mi><m:mn>1</m:mn></m:msub></m:math>
+as stopband ripple <m:math><m:msub><m:mi>δ</m:mi><m:mn>2</m:mn></m:msub></m:math>. Effectively the optimal design methods
+allow the degrees of freedom in the impulse response to be focused on the
+most stressing parts of the frequency response design while the window method
+treats all parts equally. The frequency-sampling method falls in between.</para>
+    </section>
+    <section id="uid4">
+      <title>The Meaning of the Design Parameter α</title>
+      <para id="id2255817">More insight into the meaning of the design parameter <m:math><m:mi>α</m:mi></m:math> can be gained
+by examining all three aforementioned design methods in terms of the inverse
+discrete Fourier transform. Suppose that our objective, as it is, is to
+synthesize an N-point FIR filter. Suppose further that we
+use the approach of specifying the frequency response we desire with equally
+spaced samples in the frequency domain and then use the inverse discrete
+Fourier transform (DFT) to transform the frequency specification into a
+time-domain impulse response. This approach is shown in graphical form in
+<link target-id="uid5"/>.</para>
+      <figure id="uid5" orient="horizontal">
+        <media id="id1636681" alt=""><image src="../../media/fig5.png" mime-type="image/png" width="294"/><image for="pdf" src="../../media/fig5.eps" mime-type="application/postscript"/></media>
+        <caption>Using the Discrete Fourier Transform (DFT) as the Basis of FIR
+Filter Design</caption>
+      </figure>
+      <para id="id2255862">Analytically there is a one-to-one relationship between the N points of
+an FIR impulse response and the frequency response of the filter measured
+at N equally-spaced frequencies between 0 and <m:math><m:msub><m:mi>f</m:mi><m:mi>s</m:mi></m:msub></m:math> Hertz. Specifically it
+is straight-forward to show that the impulse response <m:math><m:mrow><m:mi>h</m:mi><m:mo>(</m:mo><m:mi>k</m:mi><m:mo>)</m:mo></m:mrow></m:math> and the complex
+gains <m:math><m:msub><m:mover accent="true"><m:mi>h</m:mi><m:mo>^</m:mo></m:mover><m:mi>n</m:mi></m:msub></m:math>, for <m:math><m:mrow><m:mn>0</m:mn><m:mo>≤</m:mo><m:mi>n</m:mi><m:mo>≤</m:mo><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:math>, are invertibly related, where
+the filter's frequency response is given by</para>
+      <equation id="uid6">
+        <m:math mode="display">
+          <m:mrow>
+            <m:mi>H</m:mi>
+            <m:mrow>
+              <m:mo>(</m:mo>
+              <m:mi>f</m:mi>
+              <m:mo>)</m:mo>
+            </m:mrow>
+            <m:mo>=</m:mo>
+            <m:mfrac>
+              <m:mn>1</m:mn>
+              <m:mi>N</m:mi>
+            </m:mfrac>
+            <m:munderover>
+              <m:mo>∑</m:mo>
+              <m:mrow>
+                <m:mi>n</m:mi>
+                <m:mo>=</m:mo>
+                <m:mn>0</m:mn>
+              </m:mrow>
+              <m:mrow>
+                <m:mi>N</m:mi>
+                <m:mo>-</m:mo>
+                <m:mn>1</m:mn>
+              </m:mrow>
+            </m:munderover>
+            <m:msub>
+              <m:mover accent="true">
+                <m:mi>h</m:mi>
+                <m:mo>^</m:mo>
+              </m:mover>
+              <m:mi>n</m:mi>
+            </m:msub>
+            <m:mfrac>
+              <m:mrow>
+                <m:mi>s</m:mi>
+                <m:mi>i</m:mi>
+                <m:mi>n</m:mi>
+                <m:mspace width="3.33333pt"/>
+                <m:mi>π</m:mi>
+                <m:mo>(</m:mo>
+                <m:mi>N</m:mi>
+                <m:mi>f</m:mi>
+                <m:mi>T</m:mi>
+                <m:mo>-</m:mo>
+                <m:mi>n</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mrow>
+                <m:mi>s</m:mi>
+                <m:mi>i</m:mi>
+                <m:mi>n</m:mi>
+                <m:mspace width="3.33333pt"/>
+                <m:mi>π</m:mi>
+                <m:mo>(</m:mo>
+                <m:mi>f</m:mi>
+                <m:mi>T</m:mi>
+                <m:mo>-</m:mo>
+                <m:mfrac>
+                  <m:mi>n</m:mi>
+                  <m:mi>N</m:mi>
+                </m:mfrac>
+                <m:mo>)</m:mo>
+              </m:mrow>
+            </m:mfrac>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2256313">Thus choosing the complex gains <m:math><m:msub><m:mover accent="true"><m:mi>h</m:mi><m:mo>^</m:mo></m:mover><m:mi>n</m:mi></m:msub></m:math> is equivalent to choosing the
+impulse response <m:math><m:mrow><m:mi>h</m:mi><m:mo>(</m:mo><m:mi>k</m:mi><m:mo>)</m:mo><m:mo>,</m:mo><m:mn>0</m:mn><m:mo>≤</m:mo><m:mi>k</m:mi><m:mo>≤</m:mo><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:math>, and, through
+ <link target-id="uid6"/>, to the filter frequency response at all values
+of <m:math><m:mi>f</m:mi></m:math> between 0 and <m:math><m:msub><m:mi>f</m:mi><m:mi>s</m:mi></m:msub></m:math> Hertz. By examining <link target-id="uid5"/> it
+can be seen that choosing a frequency response (and hence an impulse response)
+can be intuitively viewed as adjusting the gain levers on a graphic equalizer
+of the type
+now used on home stereos. Each lever sets the gain, denoted here as
+<m:math><m:msub><m:mover accent="true"><m:mi>h</m:mi><m:mo>^</m:mo></m:mover><m:mi>n</m:mi></m:msub></m:math>, of a filter given by</para>
+      <equation id="uid7">
+        <m:math mode="display">
+          <m:mrow>
+            <m:msub>
+              <m:mi>H</m:mi>
+              <m:mi>n</m:mi>
+            </m:msub>
+            <m:mrow>
+              <m:mo>(</m:mo>
+              <m:mi>f</m:mi>
+              <m:mo>)</m:mo>
+            </m:mrow>
+            <m:mo>=</m:mo>
+            <m:mfrac>
+              <m:mn>1</m:mn>
+              <m:mi>N</m:mi>
+            </m:mfrac>
+            <m:mfrac>
+              <m:mrow>
+                <m:mi>s</m:mi>
+                <m:mi>i</m:mi>
+                <m:mi>n</m:mi>
+                <m:mspace width="3.33333pt"/>
+                <m:mi>π</m:mi>
+                <m:mo>(</m:mo>
+                <m:mi>N</m:mi>
+                <m:mi>f</m:mi>
+                <m:mi>T</m:mi>
+                <m:mo>-</m:mo>
+                <m:mi>n</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mrow>
+                <m:mi>s</m:mi>
+                <m:mi>i</m:mi>
+                <m:mi>n</m:mi>
+                <m:mspace width="3.33333pt"/>
+                <m:mi>π</m:mi>
+                <m:mo>(</m:mo>
+                <m:mi>f</m:mi>
+                <m:mi>T</m:mi>
+                <m:mo>-</m:mo>
+                <m:mfrac>
+                  <m:mi>n</m:mi>
+                  <m:mi>N</m:mi>
+                </m:mfrac>
+                <m:mo>)</m:mo>
+              </m:mrow>
+            </m:mfrac>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2256528">By setting these N gain values optimally the best
+possible frequency response is
+attained.</para>
+      <para id="id2256535">The analogy of the graphic equalizer can be followed somewhat further.
+ <link target-id="uid5"/> suggests that the FIR design problem can be
+thought in the terms of the structure shown in <link target-id="uid9"/>.
+The input signal is applied to all <m:math><m:mi>N</m:mi></m:math> of what we'll the <emphasis>basis</emphasis> filters,
+where the frequency response of the <m:math><m:mi>n</m:mi></m:math>-th filter is given by
+<link target-id="uid7"/>. As noted earlier these basis filters, so called
+because they form the linearly independent set of filters used to
+construct <m:math><m:mrow><m:mi>H</m:mi><m:mo>(</m:mo><m:mi>f</m:mi><m:mo>)</m:mo></m:mrow></m:math>, are frequency-shifted versions of the same fairly
+sloppy bandpass filter. These filter outputs are then scaled by the
+complex coefficients <m:math><m:msub><m:mover accent="true"><m:mi>h</m:mi><m:mo>^</m:mo></m:mover><m:mi>n</m:mi></m:msub></m:math> and then added together to produce the
+observable filter output. Thus the basis filters are fixed and the
+<m:math><m:msub><m:mover accent="true"><m:mi>h</m:mi><m:mo>^</m:mo></m:mover><m:mi>n</m:mi></m:msub></m:math> control the frequency and hence impulse response of the
+digital filter. It should be noted that the filter is not usually actually
+constructed<footnote id="id3559892">Frequency-domain filters are of course the
+counterexample.</footnote> as shown in <link target-id="uid9"/> but it is a
+very convenient analogy when trying to understand the relationships between
+the various filter synthesis methods.</para>
+      <figure id="uid9" orient="horizontal">
+        <media id="id1165252724807" alt=""><image src="../../media/fig6.png" mime-type="image/png" width="369"/><image for="pdf" src="../../media/fig6.eps" mime-type="application/postscript"/></media>
+        <caption>The FIR Filter Design Problem Models as a Bank of Bandpass Filters</caption>
+      </figure>
+      <para id="id2256672">Now we shall use the model.
+In our quest for the true meaning of <m:math><m:mi>α</m:mi></m:math>, consider first the design of
+a simple lowpass filter. We desire the cutoff frequency <m:math><m:msub><m:mi>f</m:mi><m:mi>c</m:mi></m:msub></m:math> and the
+stopband edge <m:math><m:msub><m:mi>f</m:mi><m:mrow><m:mi>s</m:mi><m:mi>t</m:mi></m:mrow></m:msub></m:math> to be as low
+as possible and allow the peak stopband ripple to be quite large. Using the
+graphic equalizer model just discussed yields the design shown in
+<link target-id="uid10"/>. Only one filter, the one centered at DC, is used.
+Its gain is set to unity and that of all others is set to zero. The peak
+stopband ripple is determined by the first sidelobe of the only active
+filter. It can be computed to be about 13 dB below the maximum passband power
+level (measured at DC).</para>
+      <figure id="uid10" orient="horizontal">
+        <media id="id1165237403342" alt=""><image src="../../media/fig7.png" mime-type="image/png" width="217"/><image for="pdf" src="../../media/fig7.eps" mime-type="application/postscript"/></media>
+        <caption>A Simple Lowpass Filter Designed Using the Graphic Equalizer Analogy</caption>
+      </figure>
+      <para id="id2256745">What is <m:math><m:mrow><m:mi>Δ</m:mi><m:mi>f</m:mi></m:mrow></m:math> in this case? Graphically it can be seen to be somewhat
+less than than the frequency interval between DC and the first transmission
+zero of <m:math><m:mrow><m:msub><m:mi>H</m:mi><m:mi>n</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi>f</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math> which occurs at <m:math><m:mrow><m:mi>f</m:mi><m:mo>=</m:mo><m:mfrac><m:msub><m:mi>f</m:mi><m:mi>s</m:mi></m:msub><m:mi>N</m:mi></m:mfrac></m:mrow></m:math>. Suppose that
+we now rewrite <link document="m17234" target-id="uid2"> equation 2 from the module titled "Filter Sizing"</link> as</para>
+      <equation id="id2256812">
+        <m:math mode="display">
+          <m:mrow>
+            <m:mi>Δ</m:mi>
+            <m:mi>f</m:mi>
+            <m:mspace width="3.33333pt"/>
+            <m:mo>≈</m:mo>
+            <m:mspace width="3.33333pt"/>
+            <m:mi>α</m:mi>
+            <m:mfrac>
+              <m:msub>
+                <m:mi>f</m:mi>
+                <m:mi>s</m:mi>
+              </m:msub>
+              <m:mi>N</m:mi>
+            </m:mfrac>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2256850">Thus we see that in the simple filter designed in <link target-id="uid10"/>
+that associated value of <m:math><m:mi>α</m:mi></m:math> is slightly less than one.</para>
+      <para id="id2256871">Now suppose that we attempt to design a better filter, again using the graphic
+equalizer method. Our first objective is to reduce the size of the stopband
+ripple. To do this we leave <m:math><m:msub><m:mover accent="true"><m:mi>h</m:mi><m:mo>^</m:mo></m:mover><m:mn>0</m:mn></m:msub></m:math> set to
+unity and increase the values of
+<m:math><m:msub><m:mover accent="true"><m:mi>h</m:mi><m:mo>^</m:mo></m:mover><m:mn>1</m:mn></m:msub></m:math> and <m:math><m:msub><m:mover accent="true"><m:mi>h</m:mi><m:mo>^</m:mo></m:mover><m:mn>2</m:mn></m:msub></m:math> slightly
+so that their positive mainlobe values cancel the
+negative-going first sidelobe of <m:math><m:msub><m:mover accent="true"><m:mi>h</m:mi><m:mo>^</m:mo></m:mover><m:mn>0</m:mn></m:msub></m:math>. All
+other filter gain levels will
+remain set to zero. The effects of this strategy are seen in
+<link target-id="uid11"/>.</para>
+      <figure id="uid11" orient="horizontal">
+        <media id="id1165214542308" alt=""><image src="../../media/fig8.png" mime-type="image/png" width="346"/><image for="pdf" src="../../media/fig8.eps" mime-type="application/postscript"/></media>
+        <caption>Lowpass Filter Obtained Using the Second and Third DFT Basis Functions</caption>
+      </figure>
+      <para id="id2256978">The first objective, that of reducing the peak stopband ripple, is achieved.
+By choosing <m:math><m:msub><m:mover accent="true"><m:mi>h</m:mi><m:mo>^</m:mo></m:mover><m:mn>1</m:mn></m:msub></m:math> and <m:math><m:msub><m:mover accent="true"><m:mi>h</m:mi><m:mo>^</m:mo></m:mover><m:mn>2</m:mn></m:msub></m:math> just right,
+the first sidelobe of <m:math><m:msub><m:mover accent="true"><m:mi>h</m:mi><m:mo>^</m:mo></m:mover><m:mn>0</m:mn></m:msub></m:math> can
+be effectively cancelled, leaving the other sidelobes to compete for the
+peak value. The second effect is less desirable, however. From graphical
+inspection it is clear that <m:math><m:mrow><m:mi>Δ</m:mi><m:mi>f</m:mi></m:mrow></m:math>, the frequency interval between
+<m:math><m:msub><m:mi>f</m:mi><m:mi>c</m:mi></m:msub></m:math> and <m:math><m:msub><m:mi>f</m:mi><m:mrow><m:mi>s</m:mi><m:mi>t</m:mi></m:mrow></m:msub></m:math>, has grown. It now exceeds <m:math><m:mfrac><m:msub><m:mi>f</m:mi><m:mi>s</m:mi></m:msub><m:mi>N</m:mi></m:mfrac></m:math>, thus
+making <m:math><m:mi>α</m:mi></m:math> greater than unity.</para>
+      <para id="id2257119">These trends continue as more and more filter gains <m:math><m:msub><m:mover accent="true"><m:mi>h</m:mi><m:mo>^</m:mo></m:mover><m:mi>n</m:mi></m:msub></m:math> are allowed to
+become non-zero in the quest of further reducing the peak stopband ripple.
+The peak is reduced, the ripple structure begins to approach the
+Chebyshev equal-ripple firm seen in <link document="m17232" target-id="uid3">Figure 1 from the module titled "Statement of the Optimal Linear Phase FIR Filter Design Problem"</link>,
+
+and the transition
+band stretches out as more filters are used to try to constrain the stopband
+frequency response to the stopband ripple goals. The design parameter <m:math><m:mi>α</m:mi></m:math>
+is just a measure of the number of filters, or, equivalently, the number of
+equalizer levers, needed to transit from one gain
+level (e.g., the passband) to another (e.g., the stopband) while achieving the
+desired passband and stopband ripple performance. Since <m:math><m:mfrac><m:msub><m:mi>f</m:mi><m:mi>s</m:mi></m:msub><m:mi>N</m:mi></m:mfrac></m:math> is
+the spacing between the bins of an N-point DFT, the term <m:math><m:mi>α</m:mi></m:math> can also
+be thought of as the number of DFT bins needed to make a gain transition. This
+interpretation is explored next.</para>
+    </section>
+  </content>
+</document>

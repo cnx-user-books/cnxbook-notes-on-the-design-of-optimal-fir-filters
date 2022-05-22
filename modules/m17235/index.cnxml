@@ -1,0 +1,148 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Extension to Non-lowpass Filters</title>
+  <metadata>
+  <md:content-id>m17235</md:content-id><md:title>Extension to Non-lowpass Filters</md:title>
+  <md:abstract/>
+  <md:uuid>d54c3914-aa90-4106-98fb-ec97ecc76661</md:uuid>
+</metadata>
+
+<content>
+    
+      
+      <para id="id2255548">All of the discussion to this point has focused on lowpass filters.
+Practical applications require other types, of course, including highpass,
+bandpass, and bandstop designs. In fact the analysis presented in the
+previous sections applies to all of these design criteria and the rules
+for filter length estimation can be used almost directly. In general
+  <link document="m17234" target-id="uid2">Equation 1</link>
+
+and <link document="m17234" target-id="uid3">Equation 2 from the module titled "Filter Sizing"</link>
+
+apply when one of
+the equal ripple specifications dominates all others and when one of the
+transition band specifications dominates all others. As a practical matter
+this means that <m:math><m:msub><m:mi>δ</m:mi><m:mi>i</m:mi></m:msub></m:math> dominates if it is less than one-tenth of all
+other rippple specifications and that <m:math><m:mrow><m:mi>Δ</m:mi><m:msub><m:mi>f</m:mi><m:mi>i</m:mi></m:msub></m:mrow></m:math> dominates if it is
+simply less than all others. Suppose we define <m:math><m:mi>δ</m:mi></m:math> and <m:math><m:mrow><m:mi>Δ</m:mi><m:mi>f</m:mi></m:mrow></m:math> by
+the equations:</para>
+      
+      <para id="element-486"><m:math mode="display">
+		<m:mtable displaystyle="true">
+			<m:mtr>
+				<m:mtd columnalign="right">
+					<m:mi>δ</m:mi>
+				</m:mtd>
+				<m:mtd>
+					<m:mo>=</m:mo>
+				</m:mtd>
+				<m:mtd columnalign="left">
+					<m:mrow>
+						<m:mi>m</m:mi>
+						<m:mi>i</m:mi>
+						<m:mi>n</m:mi>
+						<m:mo>{</m:mo>
+						<m:msub>
+							<m:mi>δ</m:mi>
+							<m:mi>i</m:mi>
+						</m:msub>
+						<m:mo>}</m:mo>
+						<m:mtext>, for all pass and stopbands i, and </m:mtext>
+					</m:mrow>
+				</m:mtd>
+			</m:mtr>
+			<m:mtr>
+				<m:mtd columnalign="right">
+					<m:mrow>
+						<m:mi>Δ</m:mi>
+						<m:mi>f</m:mi>
+					</m:mrow>
+				</m:mtd>
+				<m:mtd>
+					<m:mo>=</m:mo>
+				</m:mtd>
+				<m:mtd columnalign="left">
+					<m:mrow>
+						<m:mi>m</m:mi>
+						<m:mi>i</m:mi>
+						<m:mi>n</m:mi>
+						<m:mo>{</m:mo>
+						<m:msub>
+							<m:mi>Δf</m:mi>
+							<m:mi>k</m:mi>
+						</m:msub>
+						<m:mo>}</m:mo>
+						<m:mtext>for all transition bands k</m:mtext>
+					</m:mrow>
+				</m:mtd>
+			</m:mtr>
+		</m:mtable>
+	</m:math>
+</para><equation id="element-569"><m:math>
+<m:mi>δ</m:mi>
+<m:mo>=</m:mo>
+<m:mtext>min</m:mtext>
+<m:mo>{</m:mo>
+<m:msub>
+<m:mi>δ</m:mi>
+<m:mi>i</m:mi>
+</m:msub>
+<m:mo>}</m:mo>
+<m:mo>,</m:mo>
+<m:mtext>for all pass and stopbands i, and</m:mtext>
+</m:math></equation><equation id="element-868"><m:math>
+<m:mi>Δ</m:mi>
+<m:mi>f</m:mi>
+<m:mo>=</m:mo>
+<m:mtext>min</m:mtext>
+<m:mo>{</m:mo>
+<m:mi>Δ</m:mi>
+<m:msub>
+<m:mi>f</m:mi>
+<m:mi>k</m:mi>
+</m:msub>
+<m:mo>}</m:mo>
+<m:mtext>for all transition bands k</m:mtext>
+</m:math></equation><para id="id2255818">If so then equation <link document="m17234" target-id="uid2">Equation 1 from the module titled "Filter Sizing"</link>
+
+can be used directly and the
+equation for <m:math><m:mi>α</m:mi></m:math> becomes</para>
+      <equation id="id2255835">
+        <m:math mode="display">
+          <m:mrow>
+            <m:mi>α</m:mi>
+            <m:mo>=</m:mo>
+            <m:mn>0</m:mn>
+            <m:mo>.</m:mo>
+            <m:mn>22</m:mn>
+            <m:mo>-</m:mo>
+            <m:mfrac>
+              <m:mrow>
+                <m:mi>l</m:mi>
+                <m:mi>o</m:mi>
+                <m:msub>
+                  <m:mi>g</m:mi>
+                  <m:mi>e</m:mi>
+                </m:msub>
+                <m:mi>δ</m:mi>
+              </m:mrow>
+              <m:mi>π</m:mi>
+            </m:mfrac>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2254919">A final hint - Watch out for the implicit boundary conditions present in
+the design of linear phase FIR digital filters in two cases: even order,
+symmetric response and odd order, antisymmetrical response. In both of these
+cases the underlying equations for the filter's frequency response constrain
+it to equal exactly zero at <m:math><m:mfrac><m:msub><m:mi>f</m:mi><m:mi>s</m:mi></m:msub><m:mn>2</m:mn></m:mfrac></m:math>. This is obviously not a problem
+for lowpass filters, since the desired gain at <m:math><m:mfrac><m:msub><m:mi>f</m:mi><m:mi>s</m:mi></m:msub><m:mn>2</m:mn></m:mfrac></m:math> is zero
+already. However, in the design of multiband and highpass filters an
+inordinate amount of engineering time has been spent trying to design
+even-order filters when in fact it is impossible to do so. The Parks-McClellan
+algorithm will gamely try, but will fail. As a rule, use odd values of <m:math><m:mi>N</m:mi></m:math>
+for highpass and multiband filters requiring nonzero response at
+<m:math><m:mfrac><m:msub><m:mi>f</m:mi><m:mi>s</m:mi></m:msub><m:mn>2</m:mn></m:mfrac></m:math> and use even-order filters for differentiators.</para>
+    
+  </content>
+</document>

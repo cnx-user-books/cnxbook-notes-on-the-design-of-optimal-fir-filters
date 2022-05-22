@@ -1,0 +1,692 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Filter Sizing</title>
+  <metadata>
+  <md:content-id>m17234</md:content-id><md:title>Filter Sizing</md:title>
+  <md:abstract/>
+  <md:uuid>5be4a99c-1348-46a0-b21c-25866a7d24c3</md:uuid>
+</metadata>
+
+<content>
+    <section id="uid1">
+      <title>The Formula for Estimation of the FIR Filter Length</title>
+      <para id="id2255548">For many lowpass filter designs the peak passband excursion <m:math><m:msub><m:mi>δ</m:mi><m:mn>1</m:mn></m:msub></m:math>
+exceeds the peak stopband excursion <m:math><m:msub><m:mi>δ</m:mi><m:mn>2</m:mn></m:msub></m:math> by a factor of ten or more.
+This ratio, earlier denoted as the weight <m:math><m:mi>W</m:mi></m:math>, was just evaluted
+in the previous section to have the
+value 28.8 for a typical set of specifications.
+In this example the stopband attenuation specification drives the required
+filter order. In this case, and with a few additional assumptions which
+will be enumerated later, the
+number of coefficients in the impulse response of a high-order
+FIR linear phase filter, denoted <m:math><m:mi>N</m:mi></m:math>, can be accurately estimated using the
+formula:</para>
+      <equation id="uid2">
+        <m:math mode="display">
+          <m:mrow>
+            <m:mi>N</m:mi>
+            <m:mspace width="3.33333pt"/>
+            <m:mo>≈</m:mo>
+            <m:mspace width="3.33333pt"/>
+            <m:mfrac>
+              <m:mrow>
+                <m:mi>α</m:mi>
+                <m:mspace width="3.33333pt"/>
+                <m:msub>
+                  <m:mi>f</m:mi>
+                  <m:mi>s</m:mi>
+                </m:msub>
+              </m:mrow>
+              <m:mrow>
+                <m:mi>Δ</m:mi>
+                <m:mi>f</m:mi>
+              </m:mrow>
+            </m:mfrac>
+            <m:mo>,</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2255656">where the design parameter <m:math><m:mi>α</m:mi></m:math> is given by the equation:</para>
+      <equation id="uid3">
+        <m:math mode="display">
+          <m:mrow>
+            <m:mi>α</m:mi>
+            <m:mspace width="3.33333pt"/>
+            <m:mo>=</m:mo>
+            <m:mspace width="3.33333pt"/>
+            <m:mn>0</m:mn>
+            <m:mo>.</m:mo>
+            <m:mn>22</m:mn>
+            <m:mspace width="3.33333pt"/>
+            <m:mo>+</m:mo>
+            <m:mspace width="3.33333pt"/>
+            <m:mn>0</m:mn>
+            <m:mo>.</m:mo>
+            <m:mn>0366</m:mn>
+            <m:mo>·</m:mo>
+            <m:mi>S</m:mi>
+            <m:mi>B</m:mi>
+            <m:mi>R</m:mi>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2254893">As before, SBR is the minimum stopband attenuation compared to the
+nominal passband power transmission level, measured in decibels.</para>
+      
+      <example id="element-319"><title>Continuing from Example I "Statement of the Optimal Linear FIR Filter Design Problem" <!-- <cnxn document="STATEMENT" target="element-456"/> --></title><para id="element-453">
+  Suppose as before that the lowpass
+filter of interest is to have a peak-to-peak passband ripple (PBR) of 0.5 dB and
+a minimum stopband attenuation of 60 dB. Since <m:math><m:mi>W</m:mi></m:math> has been evaluated to be
+approximately 29 in this case, <link target-id="uid2"/> applies. Using
+<link target-id="uid3"/>, <m:math><m:mi>α</m:mi></m:math> is evaluated to be 2.42. Thus
+<m:math><m:mi>N</m:mi></m:math> is closely approximated by 2.42 times the reciprocal of the normalized
+transition bandwidth <m:math><m:mfrac><m:mrow><m:mi>Δ</m:mi><m:mi>f</m:mi></m:mrow><m:msub><m:mi>f</m:mi><m:mi>s</m:mi></m:msub></m:mfrac></m:math>.
+To continue the example assume that the sampling rate is 8 kHz, that
+the cutoff frequency <m:math><m:msub><m:mi>f</m:mi><m:mi>c</m:mi></m:msub></m:math> is 1530 Hz, and that the stopband edge <m:math><m:msub><m:mi>f</m:mi><m:mrow><m:mi>s</m:mi><m:mi>t</m:mi></m:mrow></m:msub></m:math>
+is 2330 Hz. Thus <m:math><m:mrow><m:mi>Δ</m:mi><m:mi>f</m:mi><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mn>800</m:mn></m:mrow></m:math> Hz and <m:math><m:mrow><m:mfrac><m:mrow><m:mi>Δ</m:mi><m:mi>f</m:mi></m:mrow><m:msub><m:mi>f</m:mi><m:mi>s</m:mi></m:msub></m:mfrac><m:mspace width="3.33333pt"/><m:mo>=</m:mo><m:mspace width="3.33333pt"/><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>1</m:mn></m:mrow></m:math>,
+yielding an estimated filter order <m:math><m:mi>N</m:mi></m:math> of approximately 24.
+Executing the Parks-McClellan design program with these
+parameters happens to produce an impulse response which almost perfectly
+matches the desired result (e.g., peak stopband ripple of 60.07 dB as
+opposed to the stated objective of 60 dB).<m:math><m:mrow><m:mspace width="3.33333pt"/><m:mspace width="3.33333pt"/><m:mo>♠</m:mo></m:mrow></m:math>
+</para>
+</example><para id="id2256183">Note that the required filter order <m:math><m:mi>N</m:mi></m:math> as estimated by
+ <link target-id="uid2"/> and <link target-id="uid3"/> does not depend on
+the passband ripple PBR or on the exact values of the cutoff and stopband
+frequencies. Thus, when the conditions allowing the underlying assumptions to
+be met are true, estimating the required filter order <m:math><m:mi>N</m:mi></m:math> becomes very easy.</para>
+      <para id="id2256216"><link target-id="uid5"/> provides the values of the design parameter <m:math><m:mi>α</m:mi></m:math>
+from <link target-id="uid3"/>
+for various degrees of stopband suppression. Given also is the range of
+the passband ripple for which the values of <m:math><m:mi>α</m:mi></m:math> apply. The
+column marked <emphasis>maximum passband ripple</emphasis> reflects the the assumption that
+the passband deviation <m:math><m:msub><m:mi>δ</m:mi><m:mn>1</m:mn></m:msub></m:math> is small compared to unity;
+specifically, the stated value of 1.74 dB corresponds
+to <m:math><m:mrow><m:msub><m:mi>δ</m:mi><m:mn>1</m:mn></m:msub><m:mo>=</m:mo><m:mn>0</m:mn><m:mo>.</m:mo><m:mn>1</m:mn></m:mrow></m:math>. The rightmost column, denoted <emphasis>minimum
+passband ripple</emphasis>, is the limit imposed by the assumption that
+<m:math><m:mrow><m:msub><m:mi>δ</m:mi><m:mn>1</m:mn></m:msub><m:mspace width="3.33333pt"/><m:mo>&gt;</m:mo><m:mspace width="3.33333pt"/><m:mn>10</m:mn><m:mo>·</m:mo><m:msub><m:mi>δ</m:mi><m:mn>2</m:mn></m:msub></m:mrow></m:math>. Of course FIR linear phase equal ripple
+filters can be designed with passband ripple extending beyond the stated range.
+However, as the PBR specification approaches either of these endpoints the
+validity of <link target-id="uid3"/> will degrade. The predicted filter length
+will err on the low side for small PBR values and be overly pessimistic for
+PBR <m:math><m:mo>&gt;</m:mo></m:math> 1.74 dB. In such cases, an iteration on design might be necessary to
+obtain the desired filter characteristics.</para>
+      <table id="uid5" summary="">
+<tgroup cols="4"><tbody>
+            <row>
+              <entry>Stopband Attenuation (in dB)</entry>
+              <entry>
+                <m:math>
+                  <m:mi>α</m:mi>
+                </m:math>
+              </entry>
+              <entry>Maximum Passband Ripple  (in dB)</entry>
+              <entry>Minimum
+Passband Ripple  (in dB)</entry>
+            </row>           
+            <row>
+              <entry>45</entry>
+              <entry>1.87</entry>
+              <entry>1.74</entry>
+              <entry>1.0</entry>
+            </row>
+            <row>
+              <entry>50</entry>
+              <entry>2.05</entry>
+              <entry>1.74</entry>
+              <entry>0.55</entry>
+            </row>
+            <row>
+              <entry>55</entry>
+              <entry>2.23</entry>
+              <entry>1.74</entry>
+              <entry>0.31</entry>
+            </row>
+            <row>
+              <entry>60</entry>
+              <entry>2.42</entry>
+              <entry>1.74</entry>
+              <entry>0.174</entry>
+            </row>
+            <row>
+              <entry>65</entry>
+              <entry>2.60</entry>
+              <entry>1.74</entry>
+              <entry>0.098</entry>
+            </row>
+            <row>
+              <entry>70</entry>
+              <entry>2.78</entry>
+              <entry>1.74</entry>
+              <entry>0.055</entry>
+            </row>
+          </tbody>
+        
+
+
+</tgroup>
+<caption>Table 1: Values of the Design Parameter α as a Function of the Minimum  Stopband Attenuation </caption>
+</table>
+      <section id="uid6">
+        <title>Derivation of the Formula</title>
+        <para id="id2256660">This section describes the theoretical underpinnings of
+<link target-id="uid2"/> and <link target-id="uid3"/>. A clear understanding of this
+section is not required to use the Parks-McClellan software routines or
+to enjoy the remainder of this technical note.</para>
+        <para id="id2256677">As discussed in Section 2, the Parks-McClellan synthesis algorithm uses the
+Remez exchange algorithm to optimally select the values of the <m:math><m:mi>N</m:mi></m:math> impulse
+response coefficients in such a way as to minimize the weighted peak difference
+between the desired magnitude frequency response and the actual one. Since
+the solution to this optimization problem does not have a closed form, it is
+not easy to generalize its properties. To learn about its properties and to
+develop appropriate design rules, McClellan, Rabiner, and others synthesized
+thousands of filters and measured their properties. Curves with this sort of
+information are presented in [1], along with a complicated empirical formula for
+the filter order <m:math><m:mi>N</m:mi></m:math> in terms of all of the parameters specifying the filter.
+While this work is not immediately useful for design work, a limiting case
+uncovered by those workers does provide some insight into the optimal
+filter solutions and leads to the simple rules compressed into
+<link target-id="uid2"/> and <link target-id="uid3"/>.</para>
+        <para id="id2256728">Suppose we desire to design a high-order, FIR, linear phase filter for
+which the passband is as narrow as possible. Looking again at
+<link document="m17232" target-id="uid3">Figure 1 from the module titled "Statement of the Optimal Linear Phase FIR Filter Design Problem"</link>
+
+with this in mind reveals that all of
+the ripple behavior for such a filter will occur in the stopband. Such
+a filter, or a very close approximation to it, can be synthesized using
+another FIR filter design method, that of multiplying a
+sampled <m:math><m:mfrac><m:mrow><m:mi>s</m:mi><m:mi>i</m:mi><m:mi>n</m:mi><m:mspace width="3.33333pt"/><m:mi>q</m:mi></m:mrow><m:mi>q</m:mi></m:mfrac></m:math> function, where <m:math><m:mrow><m:mi>q</m:mi><m:mo>=</m:mo><m:mfrac><m:mrow><m:mi>π</m:mi><m:mi>f</m:mi></m:mrow><m:msub><m:mi>f</m:mi><m:mi>s</m:mi></m:msub></m:mfrac></m:mrow></m:math>,
+by an <m:math><m:mi>N</m:mi></m:math>-point window function
+constructed from a Chebyshev polynomial.
+The sampled <m:math><m:mfrac><m:mrow><m:mi>s</m:mi><m:mi>i</m:mi><m:mi>n</m:mi><m:mspace width="3.33333pt"/><m:mi>q</m:mi></m:mrow><m:mi>q</m:mi></m:mfrac></m:math>, or sinc, function is the inverse z-transform
+of a perfect lowpass filter. It cannot be used directly since it extends
+infinitely far into both forward and backward time. A finite duration
+impulse response is obtained by multiplying the “perfect" response by
+a finite-duration window function. The one discussed here uses Chebyshev
+polynomials as their basis.
+These polynomials are discussed in
+<link document="m17238">Appendix B</link>
+
+They all have the property that the polynomials'
+peak magnitude is unity for values of <m:math><m:mi>x</m:mi></m:math> between -1 and 1, and that for
+greater values of <m:math><m:mrow><m:mo>|</m:mo><m:mi>x</m:mi><m:mo>|</m:mo></m:mrow></m:math>, the magnitude grows as <m:math><m:msup><m:mi>x</m:mi><m:mi>M</m:mi></m:msup></m:math> where <m:math><m:mi>M</m:mi></m:math> is the order
+of the polynomial. One such polynomial is shown in <link target-id="uid7"/>.</para>
+        <figure id="uid7" orient="horizontal">
+          <media id="id36353286" alt=""><image src="../../media/fig2.png" mime-type="image/png" width="305"/><image for="pdf" src="../../media/fig2.eps" mime-type="application/postscript"/></media>
+          <caption>A Chebyshev Polynomial (drawn from [1])</caption>
+        </figure>
+        <para id="id2256912">We desire that the oscillatory portion of the polynomial correspond to the
+stopband region of the filter response and the <m:math><m:msup><m:mi>x</m:mi><m:mi>M</m:mi></m:msup></m:math> portion to correspond
+to the transition from the stopband to the passband. This is accomplished by
+invoking a change of variables relating <m:math><m:mi>x</m:mi></m:math> to the frequency <m:math><m:mi>f</m:mi></m:math>. The
+resulting equation is then evaluated at the several points to obtain an
+expression for the transition bandwidth <m:math><m:mrow><m:mi>Δ</m:mi><m:mspace width="3.33333pt"/><m:mi>f</m:mi></m:mrow></m:math>. The details of this
+manipulation are contained in  <link document="m17239">Appendix C</link>.
+
+They result
+in the following equation:</para>
+        <equation id="id2256975">
+          <m:math mode="display">
+            <m:mrow>
+              <m:mi>Δ</m:mi>
+              <m:mi>f</m:mi>
+              <m:mo>=</m:mo>
+              <m:mfrac>
+                <m:msub>
+                  <m:mi>f</m:mi>
+                  <m:mi>s</m:mi>
+                </m:msub>
+                <m:mrow>
+                  <m:mi>π</m:mi>
+                  <m:mo>(</m:mo>
+                  <m:mi>N</m:mi>
+                  <m:mo>-</m:mo>
+                  <m:mn>1</m:mn>
+                  <m:mo>)</m:mo>
+                </m:mrow>
+              </m:mfrac>
+              <m:mrow>
+                <m:mo>[</m:mo>
+                <m:mi>c</m:mi>
+                <m:mi>o</m:mi>
+                <m:mi>s</m:mi>
+                <m:msup>
+                  <m:mi>h</m:mi>
+                  <m:mrow>
+                    <m:mo>-</m:mo>
+                    <m:mn>1</m:mn>
+                  </m:mrow>
+                </m:msup>
+                <m:mrow>
+                  <m:mo>(</m:mo>
+                  <m:mfrac>
+                    <m:mrow>
+                      <m:mn>1</m:mn>
+                      <m:mo>+</m:mo>
+                      <m:msub>
+                        <m:mi>δ</m:mi>
+                        <m:mn>1</m:mn>
+                      </m:msub>
+                    </m:mrow>
+                    <m:msub>
+                      <m:mi>δ</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mfrac>
+                  <m:mo>)</m:mo>
+                </m:mrow>
+                <m:mo>-</m:mo>
+                <m:msup>
+                  <m:mrow>
+                    <m:mo>{</m:mo>
+                    <m:msup>
+                      <m:mrow>
+                        <m:mo>(</m:mo>
+                        <m:mi>c</m:mi>
+                        <m:mi>o</m:mi>
+                        <m:mi>s</m:mi>
+                        <m:msup>
+                          <m:mi>h</m:mi>
+                          <m:mrow>
+                            <m:mo>-</m:mo>
+                            <m:mn>1</m:mn>
+                          </m:mrow>
+                        </m:msup>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mfrac>
+                            <m:mrow>
+                              <m:mn>1</m:mn>
+                              <m:mo>+</m:mo>
+                              <m:msub>
+                                <m:mi>δ</m:mi>
+                                <m:mn>1</m:mn>
+                              </m:msub>
+                            </m:mrow>
+                            <m:msub>
+                              <m:mi>δ</m:mi>
+                              <m:mn>2</m:mn>
+                            </m:msub>
+                          </m:mfrac>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>)</m:mo>
+                      </m:mrow>
+                      <m:mn>2</m:mn>
+                    </m:msup>
+                    <m:mo>-</m:mo>
+                    <m:msup>
+                      <m:mrow>
+                        <m:mo>(</m:mo>
+                        <m:mi>c</m:mi>
+                        <m:mi>o</m:mi>
+                        <m:mi>s</m:mi>
+                        <m:msup>
+                          <m:mi>h</m:mi>
+                          <m:mrow>
+                            <m:mo>-</m:mo>
+                            <m:mn>1</m:mn>
+                          </m:mrow>
+                        </m:msup>
+                        <m:mrow>
+                          <m:mo>(</m:mo>
+                          <m:mfrac>
+                            <m:mrow>
+                              <m:mn>1</m:mn>
+                              <m:mo>-</m:mo>
+                              <m:msub>
+                                <m:mi>δ</m:mi>
+                                <m:mn>1</m:mn>
+                              </m:msub>
+                            </m:mrow>
+                            <m:msub>
+                              <m:mi>δ</m:mi>
+                              <m:mn>2</m:mn>
+                            </m:msub>
+                          </m:mfrac>
+                          <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mo>)</m:mo>
+                      </m:mrow>
+                      <m:mn>2</m:mn>
+                    </m:msup>
+                    <m:mo>}</m:mo>
+                  </m:mrow>
+                  <m:mfrac>
+                    <m:mn>1</m:mn>
+                    <m:mn>2</m:mn>
+                  </m:mfrac>
+                </m:msup>
+                <m:mo>]</m:mo>
+              </m:mrow>
+              <m:mo>.</m:mo>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id2257202">If <m:math><m:msub><m:mi>δ</m:mi><m:mn>1</m:mn></m:msub></m:math> is small compared to unity and <m:math><m:mi>N</m:mi></m:math> is large
+compared to unity, as already assumed, then <m:math><m:mrow><m:mi>Δ</m:mi><m:mi>f</m:mi></m:mrow></m:math> is closely
+approximated by</para>
+        <equation id="uid8">
+          <m:math mode="display">
+            <m:mrow>
+              <m:mi>Δ</m:mi>
+              <m:mi>f</m:mi>
+              <m:mo>=</m:mo>
+              <m:mfrac>
+                <m:msub>
+                  <m:mi>f</m:mi>
+                  <m:mi>s</m:mi>
+                </m:msub>
+                <m:mrow>
+                  <m:mi>π</m:mi>
+                  <m:mi>N</m:mi>
+                </m:mrow>
+              </m:mfrac>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi>c</m:mi>
+                <m:mi>o</m:mi>
+                <m:mi>s</m:mi>
+                <m:msup>
+                  <m:mi>h</m:mi>
+                  <m:mrow>
+                    <m:mo>-</m:mo>
+                    <m:mn>1</m:mn>
+                  </m:mrow>
+                </m:msup>
+                <m:mrow>
+                  <m:mo>(</m:mo>
+                  <m:mfrac>
+                    <m:mn>1</m:mn>
+                    <m:msub>
+                      <m:mi>δ</m:mi>
+                      <m:mn>2</m:mn>
+                    </m:msub>
+                  </m:mfrac>
+                  <m:mo>)</m:mo>
+                </m:mrow>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>.</m:mo>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id2257320">When the argument of the hyperbolic cosine is large, the
+function can be approximated as</para>
+        <equation id="id2257327">
+          <m:math mode="display">
+            <m:mrow>
+              <m:mfrac>
+                <m:mn>1</m:mn>
+                <m:msub>
+                  <m:mi>δ</m:mi>
+                  <m:mn>2</m:mn>
+                </m:msub>
+              </m:mfrac>
+              <m:mo>=</m:mo>
+              <m:mi>c</m:mi>
+              <m:mi>o</m:mi>
+              <m:mi>s</m:mi>
+              <m:mi>h</m:mi>
+              <m:mspace width="3.33333pt"/>
+              <m:mi>y</m:mi>
+              <m:mo>≈</m:mo>
+              <m:mfrac>
+                <m:msup>
+                  <m:mi>e</m:mi>
+                  <m:mi>y</m:mi>
+                </m:msup>
+                <m:mn>2</m:mn>
+              </m:mfrac>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id2257379">With suitable manipulation we find that</para>
+        <equation id="id2257384">
+          <m:math mode="display">
+            <m:mrow>
+              <m:mi>y</m:mi>
+              <m:mo>≈</m:mo>
+              <m:mi>l</m:mi>
+              <m:mi>o</m:mi>
+              <m:msub>
+                <m:mi>g</m:mi>
+                <m:mi>e</m:mi>
+              </m:msub>
+              <m:mfrac>
+                <m:mn>2</m:mn>
+                <m:msub>
+                  <m:mi>δ</m:mi>
+                  <m:mn>2</m:mn>
+                </m:msub>
+              </m:mfrac>
+              <m:mo>=</m:mo>
+              <m:mi>l</m:mi>
+              <m:mi>o</m:mi>
+              <m:msub>
+                <m:mi>g</m:mi>
+                <m:mi>e</m:mi>
+              </m:msub>
+              <m:mn>2</m:mn>
+              <m:mo>-</m:mo>
+              <m:mi>l</m:mi>
+              <m:mi>o</m:mi>
+              <m:msub>
+                <m:mi>g</m:mi>
+                <m:mi>e</m:mi>
+              </m:msub>
+              <m:msub>
+                <m:mi>δ</m:mi>
+                <m:mn>2</m:mn>
+              </m:msub>
+              <m:mo>.</m:mo>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id2257463">Substituting this expression for the inverse hyperbolic cosine
+yields a simple formula for <m:math><m:mrow><m:mi>Δ</m:mi><m:mi>f</m:mi></m:mrow></m:math>:</para>
+        <equation id="id2257483">
+          <m:math mode="display">
+            <m:mrow>
+              <m:mi>Δ</m:mi>
+              <m:mi>f</m:mi>
+              <m:mo>=</m:mo>
+              <m:mfrac>
+                <m:msub>
+                  <m:mi>f</m:mi>
+                  <m:mi>s</m:mi>
+                </m:msub>
+                <m:mrow>
+                  <m:mi>π</m:mi>
+                  <m:mi>N</m:mi>
+                </m:mrow>
+              </m:mfrac>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi>l</m:mi>
+                <m:mi>o</m:mi>
+                <m:msub>
+                  <m:mi>g</m:mi>
+                  <m:mi>e</m:mi>
+                </m:msub>
+                <m:mn>2</m:mn>
+                <m:mo>-</m:mo>
+                <m:mi>l</m:mi>
+                <m:mi>o</m:mi>
+                <m:msub>
+                  <m:mi>g</m:mi>
+                  <m:mi>e</m:mi>
+                </m:msub>
+                <m:msub>
+                  <m:mi>δ</m:mi>
+                  <m:mn>2</m:mn>
+                </m:msub>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>.</m:mo>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id2257558">Rewriting this equation shows that <m:math><m:mi>N</m:mi></m:math> must equal or exceed:</para>
+        <equation id="id2257574">
+          <m:math mode="display">
+            <m:mrow>
+              <m:mi>N</m:mi>
+              <m:mo>≥</m:mo>
+              <m:mfrac>
+                <m:mrow>
+                  <m:mi>α</m:mi>
+                  <m:msub>
+                    <m:mi>f</m:mi>
+                    <m:mi>s</m:mi>
+                  </m:msub>
+                </m:mrow>
+                <m:mrow>
+                  <m:mi>Δ</m:mi>
+                  <m:mi>f</m:mi>
+                </m:mrow>
+              </m:mfrac>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id2257606">where <m:math><m:mi>α</m:mi></m:math> is given by</para>
+        <equation id="uid9">
+          <m:math mode="display">
+            <m:mrow>
+              <m:mi>α</m:mi>
+              <m:mo>=</m:mo>
+              <m:mfrac>
+                <m:mrow>
+                  <m:mi>l</m:mi>
+                  <m:mi>o</m:mi>
+                  <m:msub>
+                    <m:mi>g</m:mi>
+                    <m:mi>e</m:mi>
+                  </m:msub>
+                  <m:mn>2</m:mn>
+                  <m:mo>-</m:mo>
+                  <m:mi>l</m:mi>
+                  <m:mi>o</m:mi>
+                  <m:msub>
+                    <m:mi>g</m:mi>
+                    <m:mi>e</m:mi>
+                  </m:msub>
+                  <m:msub>
+                    <m:mi>δ</m:mi>
+                    <m:mn>2</m:mn>
+                  </m:msub>
+                </m:mrow>
+                <m:mi>π</m:mi>
+              </m:mfrac>
+              <m:mo>.</m:mo>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id2257682">Rewriting <link document="m17232" target-id="uid7">equation 4 from the module titled "Statement of the Optimal Linear Phase FIR Filter Design Problem"</link>, <m:math><m:msub><m:mi>δ</m:mi><m:mn>2</m:mn></m:msub></m:math> can be written as
+</para>
+        <equation id="id2257705">
+          <m:math mode="display">
+            <m:mrow>
+              <m:msub>
+                <m:mi>δ</m:mi>
+                <m:mn>2</m:mn>
+              </m:msub>
+              <m:mo>=</m:mo>
+              <m:msup>
+                <m:mn>10</m:mn>
+                <m:mfrac>
+                  <m:mrow>
+                    <m:mo>-</m:mo>
+                    <m:mi>S</m:mi>
+                    <m:mi>B</m:mi>
+                    <m:mi>R</m:mi>
+                  </m:mrow>
+                  <m:mn>20</m:mn>
+                </m:mfrac>
+              </m:msup>
+              <m:mo>=</m:mo>
+              <m:msup>
+                <m:mi>e</m:mi>
+                <m:mfrac>
+                  <m:mrow>
+                    <m:mo>-</m:mo>
+                    <m:mn>2</m:mn>
+                    <m:mo>.</m:mo>
+                    <m:mn>303</m:mn>
+                    <m:mo>·</m:mo>
+                    <m:mi>S</m:mi>
+                    <m:mi>B</m:mi>
+                    <m:mi>R</m:mi>
+                  </m:mrow>
+                  <m:mn>20</m:mn>
+                </m:mfrac>
+              </m:msup>
+              <m:mo>.</m:mo>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id2257776">Substituting this into <link target-id="uid9"/> yields</para>
+        <equation id="id2257786">
+          <m:math mode="display">
+            <m:mrow>
+              <m:mi>α</m:mi>
+              <m:mo>=</m:mo>
+              <m:mn>0</m:mn>
+              <m:mo>.</m:mo>
+              <m:mn>22</m:mn>
+              <m:mo>+</m:mo>
+              <m:mn>0</m:mn>
+              <m:mo>.</m:mo>
+              <m:mn>0366</m:mn>
+              <m:mo>·</m:mo>
+              <m:mi>S</m:mi>
+              <m:mi>B</m:mi>
+              <m:mi>R</m:mi>
+              <m:mo>,</m:mo>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id2257828">which can be recognized as <link target-id="uid3"/>.</para>
+      </section>
+      <section id="uid10">
+        <title>Caveats</title>
+        <para id="id2257847">The derivation just presented assumes that the filter of interest is a
+lowpass design, the filter order is high (<m:math><m:mrow><m:mo>&gt;</m:mo><m:mn>20</m:mn></m:mrow></m:math> or
+so), that the passband ripple is small (that <m:math><m:mrow><m:msub><m:mi>δ</m:mi><m:mn>1</m:mn></m:msub><m:mo>≪</m:mo><m:mn>1</m:mn></m:mrow></m:math>), and that
+the filter uses all degrees of freedom except one in the stopband, that is,
+that the filter has the lowest possible cutoff frequency. In fact not all of
+these conditions have to be met to make the design <link target-id="uid2"/>
+and <link target-id="uid3"/> useful. An indication of how errors can enter the
+estimate of <m:math><m:mi>N</m:mi></m:math> under other conditions can be seen, however, by examining
+<link target-id="uid11"/>.</para>
+        <figure id="uid11" orient="horizontal">
+          <media id="id35775442" alt=""><image src="../../media/fig3.png" mime-type="image/png" width="327"/><image for="pdf" src="../../media/fig3.eps" mime-type="application/postscript"/></media>
+          <caption>Comparison of the Transition Widths of Even and Odd Optimal
+Lowpass Filters (drawn from [1])</caption>
+        </figure>
+        <para id="id2257931">This figure shows the smallest value of <m:math><m:mrow><m:mi>Δ</m:mi><m:mi>f</m:mi></m:mrow></m:math> attainable with optimal
+equal-ripple linear phase filters of different lengths as a function of the
+cutoff frequency <m:math><m:msub><m:mi>f</m:mi><m:mi>c</m:mi></m:msub></m:math>. <link target-id="uid2"/> and <link target-id="uid3"/>
+predict that the transition bandwidth is constant as a function of cutoff
+frequency and that it always gets smaller as the filter order <m:math><m:mi>N</m:mi></m:math> increases.
+<link target-id="uid11"/> shows that these generalities are not true. It can
+be seen that <m:math><m:mrow><m:mi>Δ</m:mi><m:mi>f</m:mi></m:mrow></m:math> varies somewhat as a function of <m:math><m:msub><m:mi>f</m:mi><m:mi>c</m:mi></m:msub></m:math> and that
+there are particular choices of <m:math><m:msub><m:mi>f</m:mi><m:mi>c</m:mi></m:msub></m:math> where a lower value of <m:math><m:mrow><m:mi>Δ</m:mi><m:mi>f</m:mi></m:mrow></m:math> is
+actually attainable with a lower filter order rather than a higher one.
+It would appear that, for a given filter order <m:math><m:mi>N</m:mi></m:math>, some values of <m:math><m:msub><m:mi>f</m:mi><m:mi>c</m:mi></m:msub></m:math>
+are “hard" to attain a small transition bandwidth and others are “easy".
+This is in fact true and the reason for it will be discussed in
+<link document="m17230">"Why does alpha Depend on the Cutoff Frequency fc?"</link>.
+
+</para>
+        <para id="id2258079">While <link target-id="uid11"/> shows that <m:math><m:mrow><m:mi>Δ</m:mi><m:mi>f</m:mi></m:mrow></m:math> is not truly
+independent of the cutoff frequency <m:math><m:msub><m:mi>f</m:mi><m:mi>c</m:mi></m:msub></m:math> and monotonic in the
+filter order <m:math><m:mi>N</m:mi></m:math>, the significant variations appear only for low filter
+orders. If <m:math><m:mi>N</m:mi></m:math> is greater than 20 or so, and the other conditions listed
+above hold true, as they usually do, then <link target-id="uid2"/>
+and <link target-id="uid3"/> can be used with impugnity, even for highpass
+and bandpass filters.</para>
+      </section>
+    </section>
+  </content>
+</document>
